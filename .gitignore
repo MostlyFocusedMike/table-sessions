@@ -1,0 +1,5 @@
+*.swp
+*.swo
+*.map
+.DS_Store
+Session.vim
