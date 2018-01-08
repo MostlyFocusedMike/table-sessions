@@ -4,15 +4,84 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Mike Cronin">
-        <meta name="description" content="My site">
-        <title>My Site</title>
+        <meta name="description" content="A way for people to practice their times tables">
+        <title>Times Tables</title>
         <link rel="stylesheet" href="css/styles.css" type="text/css" />
-    </head>
-    <body>
-        <div id="wrapper">
-        
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="choose-num-form">
+      <fieldset id="start-num">
+        <legend>What round would you like to start at?</legend>
+        <input type="radio" name="start-round" value="1"> 1
+        <input type="radio" name="start-round" value="2"> 2
+        <input type="radio" name="start-round" value="3"> 3
+        <input type="radio" name="start-round" value="4"> 4
+        <input type="radio" name="start-round" value="5"> 5
+        <input type="radio" name="start-round" value="6"> 6
+        <input type="radio" name="start-round" value="7"> 7
+        <input type="radio" name="start-round" value="8"> 8
+        <input type="radio" name="start-round" value="9"> 9
+        <input type="radio" name="start-round" value="10"> 10
+        <input type="radio" name="start-round" value="11"> 11
+        <input type="radio" name="start-round" value="12"> 12
+      </fieldset>
+      <fieldset id="include-num">
+        <legend>Check each number you'd like to appear in each round</legend>
+        <input type="checkbox" name="include-num" value="1"> 1
+        <input type="checkbox" name="include-num" value="2" checked> 2
+        <input type="checkbox" name="include-num" value="3" checked> 3
+        <input type="checkbox" name="include-num" value="4" checked> 4
+        <input type="checkbox" name="include-num" value="5" checked> 5
+        <input type="checkbox" name="include-num" value="6" checked> 6
+        <input type="checkbox" name="include-num" value="7" checked> 7
+        <input type="checkbox" name="include-num" value="8" checked> 8
+        <input type="checkbox" name="include-num" value="9" checked> 9
+        <input type="checkbox" name="include-num" value="10"> 10
+        <input type="checkbox" name="include-num" value="11" checked> 11
+        <input type="checkbox" name="include-num" value="12" checked> 12
+      </fieldset>
+      <button type="submit" id="start-button">Start</button>
+    </div>
+
+    <div id="prob-div">
+      <h2 id="statement"><span id="x-id">X</span> * <span id="y-id">Y</span> = </h2>
+      <input type="text" name="user-answer" id="u-ans" value="?" />
+    </div>
+
+    <div id="prob-msg">
+      <div id="cct-msg">
+        <p>Correct!</p>
+      </div>
+      <div id="wng-msg">
+        <p>Sorry, it's <span id="real-ans">???</span>.</p>
+      </div>
+    </div>
+
+    <div id="progress-bars">
+      <div id="round-holder">
+        <div id="round-mover">
         </div>
-        <script src="js/script.js" charset="utf-8"></script>
-    </body>
+      </div>
+      <div id="total-holder">
+        <div id="total-mover">
+        </div>
+      </div>
+    </div>
+
+
+    <div id="end-msg">
+      <h2>You did it!</h2>
+      <p>Your score: <span id="fin-score">??/??</span></p>
+      <p>Misses:</p>
+      <div id="mis-qs">
+        
+      </div>
+          
+    </div>
+
+      </div>
+      <script src="js/script.js" charset="utf-8"></script>
+  </body>
 </html>
 
