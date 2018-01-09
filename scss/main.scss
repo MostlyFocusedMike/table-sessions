@@ -27,9 +27,11 @@ html, body {
   #prob-msg {
     @extend %basic;
     #cct-msg {
+      display: none;
       @extend %basic;
     }
     #wng-msg {
+      display: none;
       @extend %basic;
     }
   }

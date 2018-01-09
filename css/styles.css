@@ -7,6 +7,11 @@
 html, body {
   margin: 0; }
 
+#wrapper #prob-msg #cct-msg {
+  display: none; }
+#wrapper #prob-msg #wng-msg {
+  display: none; }
+
 span {
   color: red; }
 
