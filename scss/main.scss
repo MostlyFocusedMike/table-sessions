@@ -1,5 +1,61 @@
+$bd: .1rem solid black;
+
+%basic {
+  width: 50%;
+  margin: 1rem auto;
+  border: $bd;
+  padding: .5rem;
+}
 html, body {
   margin: 0;
+}
+
+#wrapper {
+  #choose-num-form{
+    @extend %basic;
+    #start-num {
+    }
+    #include-num {
+    }
+    button {
+    }
+  }
+
+  #prob-div {
+    @extend %basic;
+  }
+  #prob-msg {
+    @extend %basic;
+    #cct-msg {
+      @extend %basic;
+    }
+    #wng-msg {
+      @extend %basic;
+    }
+  }
+
+  #progress-bars {
+    @extend %basic;
+    #round-holder {
+      @extend %basic;
+      #round-mover {
+      }
+    }
+    #total-holder {
+      @extend %basic;
+      #total-mover {
+      }
+    }
+  }
+  #end-msg {
+    @extend %basic;
+    #mis-qs {
+      @extend %basic;
+    }
+  }
+}
+span {
+  color: red;
 }
 fieldset {
 }

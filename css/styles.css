@@ -1,4 +1,13 @@
+#wrapper #choose-num-form, #wrapper #prob-div, #wrapper #prob-msg, #wrapper #prob-msg #cct-msg, #wrapper #prob-msg #wng-msg, #wrapper #progress-bars, #wrapper #progress-bars #round-holder, #wrapper #progress-bars #total-holder, #wrapper #end-msg, #wrapper #end-msg #mis-qs {
+  width: 50%;
+  margin: 1rem auto;
+  border: 0.1rem solid black;
+  padding: .5rem; }
+
 html, body {
   margin: 0; }
+
+span {
+  color: red; }
 
 /*# sourceMappingURL=styles.css.map */
