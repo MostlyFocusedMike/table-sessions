@@ -8,23 +8,22 @@
 (function () {
 "use strict"
 var timesTable = {
-  includedNum: [],
-  usedNum: [],
-  startRound: 1,
-  x: 1,
-  y: 1,
+  includedNum: [], usedNum: [], startRound: 1, x: 1, y: 1,
   xEl: document.getElementById ("x-id"),
   yEl: document.getElementById("y-id"),
+  endMsg: document.getElementById("end-msg"),
+  cctMsg: document.getElementById('cct-msg'),
+  wngMsg: document.getElementById('wng-msg'),
   correct: 0,
   wrong: [], 
   totalPoints: 0,
   setupRound: function() {
   // set up the round start number and what numbers to include
     var radios = document.getElementsByName("start-round"),
-      //radiosLength = radios.length, //just realized the legth will always be 12, but just in case that changes, these are still here
       checks = document.getElementsByName("include-num");
-      //checksLength = checks.length;
-    this.includedNum.length = 0; // resets includedNum array to prevent the entries from stacking up
+      this.includedNum.length = 0; // resets includedNum array to prevent the entries from stacking up from previous sessions/rounds
+      //radiosLength = radios.length, 
+      //checksLength = checks.length;//just realized the legth will always be 12, but just in case that changes, these are still here
     for (var i = 0; i < 12; i++) {
       if (radios[i].checked) {
         this.startRound = Number(radios[i].value);
@@ -47,23 +46,29 @@ var timesTable = {
     this.x = this.startRound;
     this.y = this.includedNum[0];
     // set up the total points possible 
-    this.restart();
+    this.reset();
+
   },
-  restart: function() {
+  reset: function() {
     this.usedNum.length = 0;
     this.wrong.length = 0;
     this.correct = 0;
     this.totalPoints = (13 - this.startRound) * this.includedNum.length;
     this.showScore();
-    document.getElementById('cct-msg').style.display = "none";
-    document.getElementById('wng-msg').style.display = "none";
-    document.getElementById("end-msg").style.display = "none";
+    this.cctMsg.style.display = "none";
+    this.wngMsg.style.display = "none";
+    this.endMsg.style.display = "none";
   },
   checkAnswer: function() {
   // compares user answer and shows a correct or wrong message, adds score
     var userAnsEl = document.getElementById("u-ans"),
     userAns = Number(userAnsEl.value),
     ans = this.x * this.y;
+    if (this.endMsg.style.display === "block") {
+      // if the end msg is visible, no values can checked and they will be erased
+      userAnsEl.value ="";
+      return;
+    }
     if (Number.isNaN(userAns) || userAnsEl.value === "") {
       window.alert("Only numbers in the answer form please");
       userAnsEl.value ="";
@@ -78,7 +83,7 @@ var timesTable = {
     } else {
       //alert('wrong');
       this.wrong.push(this.x + " * " + this.y);
-      document.getElementById("mis-qs").innerHTML += "<p>" + this.x + " * " + this.y + " = " + (this.x * this.y) + "</p>";
+      document.getElementById("mis-qs").innerHTML += "<p>" + this.x + " * " + this.y + " = " + (this.x * this.y) + ", not " + userAns +"</p>";
       document.getElementById('cct-msg').style.display = "none";
       document.getElementById('wng-msg').style.display = "block";
       document.getElementById('real-ans').textContent = ans;
@@ -109,16 +114,18 @@ var timesTable = {
       console.log('next part');
       this.nextRound();
     }
-    
   },
   nextRound: function() {
   //allows user to skip a round, or progress naturally
     this.x += 1;
+    console.log(this.x);
     if (this.x == 13) {
-      document.getElementById("end-msg").style.display = "block"; 
-      this.initialSetup();
       this.adjustScore(); 
-      return;
+      this.showScore();
+      document.getElementById("end-msg").style.display = "block"; 
+      //this.initialSetup();
+      this.x = 12 // even though the skip button is covered by the end message 
+      return;     // this would stop x from ever going higher no matter what
     }
     this.xEl.textContent = this.x;
     this.adjustScore(); 
@@ -127,11 +134,11 @@ var timesTable = {
     this.showScore();
   },
   adjustScore: function() {
-    if (this.usedNum.length !== this.includedNum.length) {
+  // if user skips a round, this ensures totalPoints goes down as well, and keeps totalPoints from 
+  // changing if the endMsg is visibile ie round over
+    if ((this.usedNum.length !== this.includedNum.length) && (this.endMsg.style.display === "none")){
       var scoreAdjuster = this.includedNum.length - this.usedNum.length;
       this.totalPoints -= scoreAdjuster;
-      alert(scoreAdjuster);
-      alert(this.includedNum.length);
     }
   },
   showScore: function() {
@@ -152,7 +159,6 @@ var timesTable = {
 // /////////////////////////////////////////////////
 
 (function() { 
-//  alert("hello");
   timesTable.setupRound();
   timesTable.initialSetup();
   timesTable.showScore();
@@ -169,7 +175,7 @@ start.addEventListener("click", function() {
 // skip round 
 skip.addEventListener("click", function() {
   timesTable.nextRound();
-  // focuses on the answer input field so a user hitting "enter" again accidentally
+  // focuses on the answer input field so user hitting "enter" again accidentally
   // won't skip the whole round since the button was still in focuse 
   uInput.focus();
 });
@@ -182,13 +188,15 @@ uInput.addEventListener("click", function() {
 // submit answer
 uInput.addEventListener('keypress', function (e) {
     var key = e.which || e.keyCode; // certain browsers use e.which for keypress id-ing, others use e.keyCode
-    if (key === 13) { // 13 is enter
+    if (key === 13) { // 13="enter" key
       timesTable.checkAnswer();
     }
 });
 
-// hide end message and restart new round 
+// hide end message and reset new round 
 document.getElementById("hide-end").addEventListener("click", function() {
-  timesTable.restart();
+  document.getElementById("end-msg").style.display = "none";
+  timesTable.initialSetup();
 });
+
 }());
