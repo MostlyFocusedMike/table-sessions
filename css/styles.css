@@ -11,6 +11,8 @@ html, body {
   display: none; }
 #wrapper #prob-msg #wng-msg {
   display: none; }
+#wrapper #end-msg {
+  display: none; }
 
 span {
   color: red; }

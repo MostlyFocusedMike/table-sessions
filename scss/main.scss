@@ -51,6 +51,7 @@ html, body {
   }
   #end-msg {
     @extend %basic;
+    display: none;
     #mis-qs {
       @extend %basic;
     }

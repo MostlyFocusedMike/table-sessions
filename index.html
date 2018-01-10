@@ -47,6 +47,7 @@
     <div id="prob-div">
       <h2 id="statement"><span id="x-id">X</span> * <span id="y-id">Y</span> = </h2>
       <input type="text" id="u-ans" value="?" />
+      <button type="submit" id="skip-button">Skip Round</button>
     </div>
 
     <div id="prob-msg">
@@ -59,6 +60,9 @@
     </div>
 
     <div id="progress-bars">
+      <div id="score-board">
+        <p><span class="fin-score">??/??</span></p>
+      </div>
       <div id="round-holder">
         <div id="round-mover">
         </div>
@@ -70,8 +74,9 @@
     </div>
 
     <div id="end-msg">
+      <button id="hide-end" type="submit">close</button>
       <h2>You did it!</h2>
-      <p>Your score: <span id="fin-score">??/??</span></p>
+      <p>Your score: <span class="fin-score">??/??</span></p>
       <p>Misses:</p>
       <div id="mis-qs">
       </div>

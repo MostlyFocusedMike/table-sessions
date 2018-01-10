@@ -16,7 +16,7 @@ var timesTable = {
   xEl: document.getElementById ("x-id"),
   yEl: document.getElementById("y-id"),
   correct: 0,
-  wrong: 0, // this may be useless
+  wrong: [], 
   totalPoints: 0,
   setupRound: function() {
   // set up the round start number and what numbers to include
@@ -40,19 +40,27 @@ var timesTable = {
   initialSetup: function() {
   // sets up the x,y variables and html content, and the total points
     // set the x and y html content
+    this.setupRound();
     this.xEl.textContent = this.startRound;
     this.yEl.textContent = this.includedNum[0];
     // set the x and y variable values 
     this.x = this.startRound;
     this.y = this.includedNum[0];
-
     // set up the total points possible 
+    this.restart();
+  },
+  restart: function() {
+    this.usedNum.length = 0;
+    this.wrong.length = 0;
+    this.correct = 0;
     this.totalPoints = (13 - this.startRound) * this.includedNum.length;
+    this.showScore();
     document.getElementById('cct-msg').style.display = "none";
     document.getElementById('wng-msg').style.display = "none";
-
+    document.getElementById("end-msg").style.display = "none";
   },
   checkAnswer: function() {
+  // compares user answer and shows a correct or wrong message, adds score
     var userAnsEl = document.getElementById("u-ans"),
     userAns = Number(userAnsEl.value),
     ans = this.x * this.y;
@@ -69,36 +77,72 @@ var timesTable = {
       this.setupNextQ();
     } else {
       //alert('wrong');
-      // this.wrong += 1; // this might be useless
+      this.wrong.push(this.x + " * " + this.y);
+      document.getElementById("mis-qs").innerHTML += "<p>" + this.x + " * " + this.y + " = " + (this.x * this.y) + "</p>";
       document.getElementById('cct-msg').style.display = "none";
       document.getElementById('wng-msg').style.display = "block";
       document.getElementById('real-ans').textContent = ans;
       this.setupNextQ();
     } 
+    this.showScore();
     userAnsEl.value ="";
+  },
+  randomY: function() { 
+  // randomly sets the y value so it is not a number before seen in the current round
+    while (true) {
+      this.y = Math.floor((Math.random() * 12) + 1);
+      if ((this.includedNum.includes(this.y)) && (this.usedNum.includes(this.y) == false)) {
+        this.yEl.textContent = this.y;
+        break;
+      }
+    }
   },
   setupNextQ: function() {
   // set up all but initial question for the x and Y html content
     this.usedNum.push(this.y);
+    console.log(this.usedNum);
+    console.log(this.includedNum);
     if (this.usedNum.length < this.includedNum.length) {
-      this.y = randomY(this.includedNum, this.usedNum, this.yEl); 
-      this.yEl.textContent = this.y;
+      this.randomY(); 
+      console.log('all ok');
     } else {
-      this.x += 1;
-      this.xEl.textContent = this.x;
-      this.usedNum.length = 0;
-      this.y = randomY(this.includedNum, this.usedNum, this.yEl); 
+      console.log('next part');
+      this.nextRound();
     }
-    function randomY(includedNum, usedNum, yEl) { 
-    // randomly sets the y value so it is not a number before seen in the current round
-      while (true) {
-        var y = Math.floor((Math.random() * 12) + 1);
-        if ((includedNum.includes(y)) && (usedNum.includes(y) == false)) {
-          yEl.textContent = y;
-          return y;
-        }
-      }
+    
+  },
+  nextRound: function() {
+  //allows user to skip a round, or progress naturally
+    this.x += 1;
+    if (this.x == 13) {
+      document.getElementById("end-msg").style.display = "block"; 
+      this.initialSetup();
+      this.adjustScore(); 
+      return;
     }
+    this.xEl.textContent = this.x;
+    this.adjustScore(); 
+    this.usedNum.length = 0;
+    this.randomY(); // sets y value and html content 
+    this.showScore();
+  },
+  adjustScore: function() {
+    if (this.usedNum.length !== this.includedNum.length) {
+      var scoreAdjuster = this.includedNum.length - this.usedNum.length;
+      this.totalPoints -= scoreAdjuster;
+      alert(scoreAdjuster);
+      alert(this.includedNum.length);
+    }
+  },
+  showScore: function() {
+  // tallys user's score
+    var score = document.getElementsByClassName("fin-score");
+    for (var i=0; i<score.length; i++) {
+      score[i].textContent = this.correct + "/" + this.totalPoints;
+    }
+  },
+  endPractice: function() {
+
   }
 }; // don't forget to use ; after objects
 
@@ -111,20 +155,40 @@ var timesTable = {
 //  alert("hello");
   timesTable.setupRound();
   timesTable.initialSetup();
-
+  timesTable.showScore();
 })();
-var start = document.getElementById("start-button");
+var start = document.getElementById("start-button"),
+  skip = document.getElementById("skip-button"),
+  uInput = document.getElementById("u-ans");
+
+// start practice session
 start.addEventListener("click", function() { 
-  timesTable.setupRound();
   timesTable.initialSetup();
-  timesTable.correct;
 });
-document.getElementById("u-ans").addEventListener('keypress', function (e) {
+
+// skip round 
+skip.addEventListener("click", function() {
+  timesTable.nextRound();
+  // focuses on the answer input field so a user hitting "enter" again accidentally
+  // won't skip the whole round since the button was still in focuse 
+  uInput.focus();
+});
+
+// clears input field 
+uInput.addEventListener("click", function() {
+  uInput.value = "";
+});
+
+// submit answer
+uInput.addEventListener('keypress', function (e) {
     var key = e.which || e.keyCode; // certain browsers use e.which for keypress id-ing, others use e.keyCode
     if (key === 13) { // 13 is enter
       timesTable.checkAnswer();
-      //alert(timesTable.correct);
     }
 });
 
+// hide end message and restart new round 
+document.getElementById("hide-end").addEventListener("click", function() {
+  timesTable.restart();
+});
 }());
