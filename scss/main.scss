@@ -39,13 +39,33 @@ html, body {
   #progress-bars {
     @extend %basic;
     #round-holder {
-      @extend %basic;
+      margin: 1rem;
+      background: green;
+      position: relative;
+      height:1rem;
+      width: 80%;
+      overflow: hidden;
       #round-mover {
+        background: red;
+        position: absolute;
+        left: 0%;
+        height: 100%;
+        width: 100%;
       }
     }
-    #total-holder {
-      @extend %basic;
-      #total-mover {
+    #session-holder {
+      margin: 1rem;
+      background: blue;
+      position: relative;
+      height:1rem;
+      width: 80%;
+      overflow: hidden;
+      #session-mover {
+        background: pink;
+        position: absolute;
+        left: 0%;
+        height: 100%;
+        width: 100%;
       }
     }
   }

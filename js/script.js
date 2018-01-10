@@ -8,12 +8,15 @@
 (function () {
 "use strict"
 var timesTable = {
-  includedNum: [], usedNum: [], startRound: 1, x: 1, y: 1,
+  includedNum: [], usedNum: [], startRound: 1, x: 1, y: 1, qNum: 0,
   xEl: document.getElementById ("x-id"),
   yEl: document.getElementById("y-id"),
   endMsg: document.getElementById("end-msg"),
   cctMsg: document.getElementById('cct-msg'),
   wngMsg: document.getElementById('wng-msg'),
+  roundBar: document.getElementById("round-mover"),
+  sessionBar: document.getElementById("session-mover"),
+  missedQs: document.getElementById("mis-qs"),
   correct: 0,
   wrong: [], 
   totalPoints: 0,
@@ -55,9 +58,13 @@ var timesTable = {
     this.correct = 0;
     this.totalPoints = (13 - this.startRound) * this.includedNum.length;
     this.showScore();
+    this.qNum = 0;
     this.cctMsg.style.display = "none";
     this.wngMsg.style.display = "none";
     this.endMsg.style.display = "none";
+    this.roundBar.style.left = "0";
+    this.sessionBar.style.left = "0";
+    this.missedQs.innerHTML = "<p>None! Great Job!</p>"; // this was the HTML value 
   },
   checkAnswer: function() {
   // compares user answer and shows a correct or wrong message, adds score
@@ -74,6 +81,7 @@ var timesTable = {
       userAnsEl.value ="";
       return;
     }
+    // if the answer is right or wrong (not an error) then the question num goes up
     if (userAns == ans) { // if they got it right
       this.correct += 1;
       //alert('right');
@@ -82,13 +90,15 @@ var timesTable = {
       this.setupNextQ();
     } else {
       //alert('wrong');
-      this.wrong.push(this.x + " * " + this.y);
+      document.getElementById("mis-qs").innerHTML = ""; // erases initial congratulations message only once a mistake is made  
       document.getElementById("mis-qs").innerHTML += "<p>" + this.x + " * " + this.y + " = " + (this.x * this.y) + ", not " + userAns +"</p>";
       document.getElementById('cct-msg').style.display = "none";
       document.getElementById('wng-msg').style.display = "block";
       document.getElementById('real-ans').textContent = ans;
       this.setupNextQ();
     } 
+    this.qNum += 1;
+    this.adjustBars();
     this.showScore();
     userAnsEl.value ="";
   },
@@ -121,6 +131,8 @@ var timesTable = {
     console.log(this.x);
     if (this.x == 13) {
       this.adjustScore(); 
+      this.qNum = this.totalPoints; // if the user skips to the end, the progress session bar 
+      this.adjustBars();            // will also jump to 100%;
       this.showScore();
       document.getElementById("end-msg").style.display = "block"; 
       //this.initialSetup();
@@ -132,6 +144,7 @@ var timesTable = {
     this.usedNum.length = 0;
     this.randomY(); // sets y value and html content 
     this.showScore();
+    this.adjustBars(); // knocks the round bar back down
   },
   adjustScore: function() {
   // if user skips a round, this ensures totalPoints goes down as well, and keeps totalPoints from 
@@ -148,9 +161,12 @@ var timesTable = {
       score[i].textContent = this.correct + "/" + this.totalPoints;
     }
   },
-  endPractice: function() {
-
-  }
+  adjustBars: function() {
+    var sesPosVal = (this.qNum / this.totalPoints * 100),
+      rouPosVal = (this.usedNum.length / this.includedNum.length * 100);
+    this.sessionBar.style.left = sesPosVal + "%"; 
+    this.roundBar.style.left = rouPosVal + "%"; 
+  } 
 }; // don't forget to use ; after objects
 
 // the skip_round function just has to 

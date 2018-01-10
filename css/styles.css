@@ -1,4 +1,4 @@
-#wrapper #choose-num-form, #wrapper #prob-div, #wrapper #prob-msg, #wrapper #prob-msg #cct-msg, #wrapper #prob-msg #wng-msg, #wrapper #progress-bars, #wrapper #progress-bars #round-holder, #wrapper #progress-bars #total-holder, #wrapper #end-msg, #wrapper #end-msg #mis-qs {
+#wrapper #choose-num-form, #wrapper #prob-div, #wrapper #prob-msg, #wrapper #prob-msg #cct-msg, #wrapper #prob-msg #wng-msg, #wrapper #progress-bars, #wrapper #end-msg, #wrapper #end-msg #mis-qs {
   width: 50%;
   margin: 1rem auto;
   border: 0.1rem solid black;
@@ -11,6 +11,32 @@ html, body {
   display: none; }
 #wrapper #prob-msg #wng-msg {
   display: none; }
+#wrapper #progress-bars #round-holder {
+  margin: 1rem;
+  background: green;
+  position: relative;
+  height: 1rem;
+  width: 80%;
+  overflow: hidden; }
+  #wrapper #progress-bars #round-holder #round-mover {
+    background: red;
+    position: absolute;
+    left: 0%;
+    height: 100%;
+    width: 100%; }
+#wrapper #progress-bars #session-holder {
+  margin: 1rem;
+  background: blue;
+  position: relative;
+  height: 1rem;
+  width: 80%;
+  overflow: hidden; }
+  #wrapper #progress-bars #session-holder #session-mover {
+    background: pink;
+    position: absolute;
+    left: 0%;
+    height: 100%;
+    width: 100%; }
 #wrapper #end-msg {
   display: none; }
 
