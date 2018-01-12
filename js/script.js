@@ -18,7 +18,6 @@ var timesTable = {
   sessionBar: document.getElementById("session-mover"),
   missedQs: document.getElementById("mis-qs"),
   correct: 0,
-  wrong: [], 
   totalPoints: 0,
   setupRound: function() {
   // set up the round start number and what numbers to include
@@ -42,6 +41,7 @@ var timesTable = {
   initialSetup: function() {
   // sets up the x,y variables and html content, and the total points
     // set the x and y html content
+    this.reset();
     this.setupRound();
     this.xEl.textContent = this.startRound;
     this.yEl.textContent = this.includedNum[0];
@@ -49,12 +49,10 @@ var timesTable = {
     this.x = this.startRound;
     this.y = this.includedNum[0];
     // set up the total points possible 
-    this.reset();
 
   },
   reset: function() {
     this.usedNum.length = 0;
-    this.wrong.length = 0;
     this.correct = 0;
     this.totalPoints = (13 - this.startRound) * this.includedNum.length;
     this.showScore();
@@ -64,7 +62,7 @@ var timesTable = {
     this.endMsg.style.display = "none";
     this.roundBar.style.left = "0";
     this.sessionBar.style.left = "0";
-    this.missedQs.innerHTML = "<p>None! Great Job!</p>"; // this was the HTML value 
+    this.missedQs.innerHTML = ""; 
   },
   checkAnswer: function() {
   // compares user answer and shows a correct or wrong message, adds score
@@ -90,8 +88,7 @@ var timesTable = {
       this.setupNextQ();
     } else {
       //alert('wrong');
-      document.getElementById("mis-qs").innerHTML = ""; // erases initial congratulations message only once a mistake is made  
-      document.getElementById("mis-qs").innerHTML += "<p>" + this.x + " * " + this.y + " = " + (this.x * this.y) + ", not " + userAns +"</p>";
+      this.missedQs.innerHTML += "<p>" + this.x + " * " + this.y + " = " + (this.x * this.y) + ", not " + userAns +"</p>";
       document.getElementById('cct-msg').style.display = "none";
       document.getElementById('wng-msg').style.display = "block";
       document.getElementById('real-ans').textContent = ans;
@@ -128,13 +125,17 @@ var timesTable = {
   nextRound: function() {
   //allows user to skip a round, or progress naturally
     this.x += 1;
-    console.log(this.x);
     if (this.x == 13) {
       this.adjustScore(); 
       this.qNum = this.totalPoints; // if the user skips to the end, the progress session bar 
       this.adjustBars();            // will also jump to 100%;
       this.showScore();
       document.getElementById("end-msg").style.display = "block"; 
+      if (this.missedQs.innerHTML === "") { // if wrong answers is empty, display congratulations message
+        this.missedQs.innerHTML = "<p>None, great job!</p>";  
+      }
+
+
       //this.initialSetup();
       this.x = 12 // even though the skip button is covered by the end message 
       return;     // this would stop x from ever going higher no matter what

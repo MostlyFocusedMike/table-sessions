@@ -8,12 +8,27 @@ $bd: .1rem solid black;
 }
 html, body {
   margin: 0;
+  font-family: Helvetica, sans-serif;
 }
 
 #wrapper {
+  header {
+    h1 {
+    }
+  }
   #choose-num-form{
     @extend %basic;
     #start-num {
+      margin: auto;
+      border: 1px solid rgb(255,232,57);
+      width: 65%;
+      text-align: center;
+      div {
+        display: inline-block;
+        width: auto;
+      }
+      input {
+      }
     }
     #include-num {
     }

@@ -5,8 +5,17 @@
   padding: .5rem; }
 
 html, body {
-  margin: 0; }
+  margin: 0;
+  font-family: Helvetica, sans-serif; }
 
+#wrapper #choose-num-form #start-num {
+  margin: auto;
+  border: 1px solid #ffe839;
+  width: 65%;
+  text-align: center; }
+  #wrapper #choose-num-form #start-num div {
+    display: inline-block;
+    width: auto; }
 #wrapper #prob-msg #cct-msg {
   display: none; }
 #wrapper #prob-msg #wng-msg {
