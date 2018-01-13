@@ -1,4 +1,9 @@
 $bd: .1rem solid black;
+%basic-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
 
 %basic {
   width: 50%;
@@ -9,33 +14,48 @@ $bd: .1rem solid black;
 html, body {
   margin: 0;
   font-family: Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 #wrapper {
-  header {
-    h1 {
+  #top {
+    background: #646464;
+    margin: 0;
+    header {
+      margin: 0 auto;
+      h1 {
+        margin: 0 auto;
+        width: 95%;
+        padding: .5rem .25rem .25rem .25rem;
+        font-size: 1.5rem;
+        font-weight: 100;
+        color: white;
+        border-bottom: .1rem solid #c7c7c7;
+        span {
+          display: inline-block;
+        }
+      }
+    }
+    #choose-num-form{
+      margin: 1rem auto;
+           button {
+      }
+      fieldset {
+        width: 85%;
+        max-width: 40rem;
+        margin: 0 auto;
+        text-align: center;
+        legend {
+          text-align: left;
+        }
+        //div {
+        //  display: inline-block;
+        //  margin: .5rem .35rem;
+        //}
+     }
     }
   }
-  #choose-num-form{
-    @extend %basic;
-    #start-num {
-      margin: auto;
-      border: 1px solid rgb(255,232,57);
-      width: 65%;
-      text-align: center;
-      div {
-        display: inline-block;
-        width: auto;
-      }
-      input {
-      }
-    }
-    #include-num {
-    }
-    button {
-    }
-  }
-
+ 
   #prob-div {
     @extend %basic;
   }
@@ -93,7 +113,86 @@ html, body {
   }
 }
 span {
-  color: red;
+//  color: red;
 }
-fieldset {
+
+
+
+
+
+/* The container */
+.container {
+  display: inline-block;
+  position: relative;
+  margin: .1rem 0;
+  padding-left: 30px;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none; // users can't highlight the numbers 
+  -ms-user-select: none;
+  user-select: none;
+  transform: scale(.7); 
+  // On mouse-over, add a grey background color
+  &:hover input ~ .checkmark, &:hover input ~ .check   {      
+    background-color: #ccc;
+  }
+  
+    input {     /* Hide the browser's default radio button */
+        position: absolute;
+        opacity: 0;
+        // When the radio button is checked, add a blue background 
+        // also show the dot or the check mark when checked
+        &:checked ~ .checkmark, &:checked ~ .check { 
+            background-color: #28AA18;
+        }
+        &:checked ~ .checkmark:after, &:checked ~ .check:after { // white circle
+            display: block;
+        }
+    }
+    .checkmark {     /* Create a custom radio button */
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+        /* Create the indicator (the dot/circle - hidden when not checked) */
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+           	top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            border-radius: 50%;
+        }
+    }
+    .check {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        &:after {
+          content: "";
+          position: absolute;
+          display: none;
+          left: 9px;
+          top: 5px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 3px 3px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
+    }
+   
 }
+

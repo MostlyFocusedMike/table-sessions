@@ -29,6 +29,7 @@ var timesTable = {
     for (var i = 0; i < 12; i++) {
       if (radios[i].checked) {
         this.startRound = Number(radios[i].value);
+        console.log("start round" + this.startRound);
         break;
        }
     };
@@ -37,6 +38,10 @@ var timesTable = {
         this.includedNum.push(Number(radios[i].value));
        }
     }
+    console.log("included num" + this.includedNum.length);
+    this.totalPoints = (13 - this.startRound) * this.includedNum.length;
+    console.log(this.totalPoints);
+    this.showScore();
   },
   initialSetup: function() {
   // sets up the x,y variables and html content, and the total points
@@ -54,8 +59,6 @@ var timesTable = {
   reset: function() {
     this.usedNum.length = 0;
     this.correct = 0;
-    this.totalPoints = (13 - this.startRound) * this.includedNum.length;
-    this.showScore();
     this.qNum = 0;
     this.cctMsg.style.display = "none";
     this.wngMsg.style.display = "none";
@@ -176,9 +179,7 @@ var timesTable = {
 // /////////////////////////////////////////////////
 
 (function() { 
-  timesTable.setupRound();
   timesTable.initialSetup();
-  timesTable.showScore();
 })();
 var start = document.getElementById("start-button"),
   skip = document.getElementById("skip-button"),
