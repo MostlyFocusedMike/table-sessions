@@ -12,63 +12,60 @@
     <div id="wrapper">
     <div id="top">
       <header>
-        <h1 id="logo"><span>Table x Sessions =</span> <span>a multiplication practice site</span></h1>
+        <h1 id="logo"><span>Table <span class="mult">*</span> Sessions =</span> <span>a multiplication practice site</span></h1>
       </header>
       <div id="choose-num-form">
         <fieldset id="start-num">
           <legend>Pick your starting round</legend>
           <label class="container">1
 						<input type="radio" name="start-round" value="1"> 
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">2
 						<input type="radio" name="start-round" value="2" checked="checked">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">3
 						<input type="radio" name="start-round" value="3">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">4
 						<input type="radio" name="start-round" value="4">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
           <label class="container">5
 						<input type="radio" name="start-round" value="5">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">6
 						<input type="radio" name="start-round" value="6">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">7
 						<input type="radio" name="start-round" value="7">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">8
 						<input type="radio" name="start-round" value="8">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
           <label class="container">9
 						<input type="radio" name="start-round" value="9">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">10
 						<input type="radio" name="start-round" value="10">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">11
 						<input type="radio" name="start-round" value="11">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
 					<label class="container">12
 						<input type="radio" name="start-round" value="12">
-						<span class="checkmark"></span>
+						<span class="radio-b"></span>
 					</label>
         </fieldset>
-
-
-
         <fieldset id="include-num">
           <legend>Check each number you'd like to appear in each round</legend>
           <label class="container">1
@@ -91,7 +88,7 @@
 						<input type="checkbox" name="include-num" value="5" checked="checked">
 						<span class="check"></span>
 					</label>
-         <label class="container">6
+          <label class="container">6
 						<input type="checkbox" name="include-num" value="6" checked="checked">
 						<span class="check"></span>
 					</label>
@@ -107,7 +104,7 @@
 						<input type="checkbox" name="include-num" value="9" checked="checked">
 						<span class="check"></span>
 					</label>
-         <label class="container">10
+          <label class="container">10
             <input type="checkbox" name="include-num" value="10"> 
 						<span class="check"></span>
 					</label>
@@ -121,37 +118,48 @@
 					</label>
         </fieldset>
         
-        <button type="submit" id="start-button">Start</button>
+        <button type="submit" id="start-button">Start new session</button>
       </div>
     </div>
-       <div id="prob-div">
-      <h2 id="statement"><span id="x-id">X</span> * <span id="y-id">Y</span> = </h2>
-      <input type="text" id="u-ans" value="?" />
+
+    <div id="progress-bars">
+      <div id="score-board">
+        <p>Score: <span class="fin-score">??/??</span></p>
+      </div>
+      <div id="round-holder">
+        <p>Round Progress</p>
+        <div id="round-mover">
+        </div>
+      </div>
+      <div id="session-holder">
+        <p>Session Progress</p>
+        <div id="session-mover">
+        </div>
+      </div>
+    </div>
+
+    <div id="prob-div">
+      <div id="statement-holder">
+        <h2 id="statement"><span id="x-id">X</span> <span class="mult">*</span> <span id="y-id">Y</span> = </h2>
+        <input type="text" id="u-ans" value="?" />
+      </div>
+      <p>Press enter to submit your answer</p>
       <button type="submit" id="skip-button">Skip Round</button>
     </div>
 
     <div id="prob-msg">
       <div id="cct-msg">
-        <p>Correct!</p>
+        <div class="msg-hold">
+          <div id="cct-circle">
+          </div>
+          <h2 id="test">Correct!</h2>
+        </div>
       </div>
       <div id="wng-msg">
         <p>Sorry, it's <span id="real-ans">???</span>.</p>
       </div>
     </div>
 
-    <div id="progress-bars">
-      <div id="score-board">
-        <p><span class="fin-score">??/??</span></p>
-      </div>
-      <div id="round-holder">
-        <div id="round-mover">
-        </div>
-      </div>
-      <div id="session-holder">
-        <div id="session-mover">
-        </div>
-      </div>
-    </div>
 
     <div id="end-msg">
       <button id="hide-end" type="submit">close</button>

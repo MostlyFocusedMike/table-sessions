@@ -1,8 +1,21 @@
-#wrapper #prob-div, #wrapper #prob-msg, #wrapper #prob-msg #cct-msg, #wrapper #prob-msg #wng-msg, #wrapper #progress-bars, #wrapper #end-msg, #wrapper #end-msg #mis-qs {
+#wrapper #prob-msg #cct-msg .msg-hold {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; }
+
+#wrapper #prob-msg #wng-msg, #wrapper #end-msg, #wrapper #end-msg #mis-qs {
   width: 50%;
   margin: 1rem auto;
   border: 0.1rem solid black;
   padding: .5rem; }
+
+#wrapper #top #choose-num-form fieldset .container .check, #wrapper #top #choose-num-form fieldset .container .radio-b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee; }
 
 html, body {
   margin: 0;
@@ -11,13 +24,13 @@ html, body {
 
 #wrapper #top {
   background: #646464;
-  margin: 0; }
+  padding: 0 0 .25rem 0; }
   #wrapper #top header {
     margin: 0 auto; }
     #wrapper #top header h1 {
       margin: 0 auto;
-      width: 95%;
-      padding: .5rem .25rem .25rem .25rem;
+      width: 90%;
+      padding: .5rem .5rem .25rem .5rem;
       font-size: 1.5rem;
       font-weight: 100;
       color: white;
@@ -25,109 +38,220 @@ html, body {
       #wrapper #top header h1 span {
         display: inline-block; }
   #wrapper #top #choose-num-form {
-    margin: 1rem auto; }
+    margin: 0 auto; }
     #wrapper #top #choose-num-form fieldset {
       width: 85%;
       max-width: 40rem;
-      margin: 0 auto;
-      text-align: center; }
+      margin: 1rem auto;
+      text-align: center;
+      color: #FAFAFA;
+      border: 2px solid #c7c7c7; }
       #wrapper #top #choose-num-form fieldset legend {
-        text-align: left; }
-#wrapper #prob-msg #cct-msg {
-  display: none; }
-#wrapper #prob-msg #wng-msg {
-  display: none; }
-#wrapper #progress-bars #round-holder {
-  margin: 1rem;
-  background: green;
-  position: relative;
-  height: 1rem;
-  width: 80%;
-  overflow: hidden; }
-  #wrapper #progress-bars #round-holder #round-mover {
-    background: red;
-    position: absolute;
-    left: 0%;
-    height: 100%;
-    width: 100%; }
-#wrapper #progress-bars #session-holder {
-  margin: 1rem;
-  background: blue;
-  position: relative;
-  height: 1rem;
-  width: 80%;
-  overflow: hidden; }
-  #wrapper #progress-bars #session-holder #session-mover {
-    background: pink;
-    position: absolute;
-    left: 0%;
-    height: 100%;
-    width: 100%; }
+        text-align: left;
+        font-weight: 100; }
+      #wrapper #top #choose-num-form fieldset .container {
+        display: inline-block;
+        position: relative;
+        margin: .1rem 0;
+        padding-left: 30px;
+        font-size: 22px;
+        color: white;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        transform: scale(0.7); }
+        #wrapper #top #choose-num-form fieldset .container:hover input ~ .radio-b, #wrapper #top #choose-num-form fieldset .container:hover input ~ .check {
+          background-color: #ccc; }
+        #wrapper #top #choose-num-form fieldset .container input {
+          position: absolute;
+          opacity: 0; }
+          #wrapper #top #choose-num-form fieldset .container input:checked ~ .radio-b, #wrapper #top #choose-num-form fieldset .container input:checked ~ .check {
+            background-color: #28AA18; }
+          #wrapper #top #choose-num-form fieldset .container input:checked ~ .radio-b:after, #wrapper #top #choose-num-form fieldset .container input:checked ~ .check:after {
+            display: block; }
+        #wrapper #top #choose-num-form fieldset .container .check:after {
+          content: "";
+          position: absolute;
+          display: none;
+          left: 9px;
+          top: 5px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 3px 3px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg); }
+        #wrapper #top #choose-num-form fieldset .container .radio-b {
+          border-radius: 50%; }
+          #wrapper #top #choose-num-form fieldset .container .radio-b:after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            border-radius: 50%; }
+    #wrapper #top #choose-num-form #start-button {
+      margin: 1rem auto;
+      font-size: 1rem;
+      width: 20rem;
+      height: 2rem;
+      display: block;
+      position: relative;
+      border: none;
+      color: #FAFAFA;
+      background: -webkit-linear-gradient(#28AA18, #238916);
+      background: -o-linear-gradient(#28AA18, #238916);
+      background: -moz-linear-gradient(#28AA18, #238916);
+      background: linear-gradient(#28AA18, #238916); }
+      #wrapper #top #choose-num-form #start-button:hover {
+        color: #EEE;
+        background: -webkit-linear-gradient(#238916, #28AA18);
+        background: -o-linear-gradient(#238916, #28AA18);
+        background: -moz-linear-gradient(#238916, #28AA18);
+        background: linear-gradient(#238916, #28AA18); }
+      #wrapper #top #choose-num-form #start-button:active {
+        color: #FAFAFA;
+        background: -webkit-linear-gradient(#28AA18, #238916);
+        background: -o-linear-gradient(#28AA18, #238916);
+        background: -moz-linear-gradient(#28AA18, #238916);
+        background: linear-gradient(#28AA18, #238916); }
+#wrapper #progress-bars {
+  width: 50%;
+  margin: 3rem auto; }
+  #wrapper #progress-bars #score-board p {
+    text-align: center;
+    color: #333;
+    font-size: 1.25rem; }
+  #wrapper #progress-bars #round-holder, #wrapper #progress-bars #session-holder {
+    margin: 1rem auto;
+    background: green;
+    position: relative;
+    height: 1.5rem;
+    width: 80%;
+    overflow: hidden;
+    background: #C7C7C7;
+    background: -webkit-linear-gradient(#C7C7C7, #AAA);
+    background: -o-linear-gradient(#C7C7C7, #AAA);
+    background: -moz-linear-gradient(#C7C7C7, #AAA);
+    background: linear-gradient(#C7C7C7, #AAA); }
+    #wrapper #progress-bars #round-holder #round-mover, #wrapper #progress-bars #round-holder #session-mover, #wrapper #progress-bars #session-holder #round-mover, #wrapper #progress-bars #session-holder #session-mover {
+      background: red;
+      position: absolute;
+      left: 0%;
+      height: 100%;
+      width: 100%;
+      background: #4A4A4A; }
+    #wrapper #progress-bars #round-holder p, #wrapper #progress-bars #session-holder p {
+      z-index: 10;
+      position: absolute;
+      margin: 0;
+      left: .3rem;
+      top: .25rem;
+      font-weight: 100;
+      color: white;
+      text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2); }
+#wrapper #prob-div {
+  width: 100%;
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+  #wrapper #prob-div #statement-holder {
+    width: 100%;
+    text-align: center; }
+    #wrapper #prob-div #statement-holder h2 {
+      margin: 0;
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: 200;
+      color: #333; }
+    #wrapper #prob-div #statement-holder input {
+      width: 5rem;
+      text-align: center;
+      display: inline-block;
+      font-weight: 200;
+      font-size: 2rem;
+      color: #333;
+      border: .1rem solid #333; }
+  #wrapper #prob-div p {
+    display: inline-block;
+    width: 100%;
+    text-align: center; }
+  #wrapper #prob-div #skip-button {
+    margin: 1rem auto;
+    font-size: 1rem;
+    width: 18rem;
+    height: 2rem;
+    display: block;
+    position: relative;
+    border: none;
+    color: #FAFAFA;
+    background: -webkit-linear-gradient(#868686, #323232);
+    background: -o-linear-gradient(#868686, #323232);
+    background: -moz-linear-gradient(#868686, #323232);
+    background: linear-gradient(#868686, #323232); }
+    #wrapper #prob-div #skip-button:hover {
+      color: #EEE;
+      background: -webkit-linear-gradient(#323232, #868686);
+      background: -o-linear-gradient(#323232, #868686);
+      background: -moz-linear-gradient(#323232, #868686);
+      background: linear-gradient(#323232, #868686); }
+    #wrapper #prob-div #skip-button:active {
+      color: #FAFAFA;
+      background: -webkit-linear-gradient(#868686, #323232);
+      background: -o-linear-gradient(#868686, #323232);
+      background: -moz-linear-gradient(#868686, #323232);
+      background: linear-gradient(#868686, #323232); }
+#wrapper #prob-msg {
+  width: 100%;
+  height: 10rem;
+  background: #646464; }
+  #wrapper #prob-msg #cct-msg {
+    display: none;
+    width: 20%;
+    margin: 1rem auto;
+    border: 0.1rem solid black; }
+    #wrapper #prob-msg #cct-msg .msg-hold #cct-circle {
+      height: 4rem;
+      width: 4rem;
+      margin: 1rem;
+      background: #28AA18;
+      border-radius: 50%;
+      position: relative; }
+      #wrapper #prob-msg #cct-msg .msg-hold #cct-circle:after {
+        content: "";
+        position: absolute;
+        display: block;
+        left: 1.2rem;
+        top: .25rem;
+        width: 1rem;
+        height: 2.5rem;
+        border: solid white;
+        border-width: 0 .5rem .5rem 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg); }
+    #wrapper #prob-msg #cct-msg .msg-hold #test {
+      display: block;
+      color: white;
+      margin: 1rem;
+      font-size: 1.5rem;
+      font-weight: 100; }
+  #wrapper #prob-msg #wng-msg {
+    display: none; }
 #wrapper #end-msg {
   display: none; }
 
-/* The container */
-.container {
-  display: inline-block;
-  position: relative;
-  margin: .1rem 0;
-  padding-left: 30px;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  transform: scale(0.7); }
-  .container:hover input ~ .checkmark, .container:hover input ~ .check {
-    background-color: #ccc; }
-  .container input {
-    /* Hide the browser's default radio button */
-    position: absolute;
-    opacity: 0; }
-    .container input:checked ~ .checkmark, .container input:checked ~ .check {
-      background-color: #28AA18; }
-    .container input:checked ~ .checkmark:after, .container input:checked ~ .check:after {
-      display: block; }
-  .container .checkmark {
-    /* Create a custom radio button */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 50%;
-    /* Create the indicator (the dot/circle - hidden when not checked) */ }
-    .container .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-      top: 9px;
-      left: 9px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: white;
-      border-radius: 50%; }
-  .container .check {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee; }
-    .container .check:after {
-      content: "";
-      position: absolute;
-      display: none;
-      left: 9px;
-      top: 5px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg); }
+.mult {
+  vertical-align: -.5rem;
+  line-height: 10%;
+  margin: 0;
+  padding: 0; }
 
 /*# sourceMappingURL=styles.css.map */
