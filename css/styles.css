@@ -1,13 +1,7 @@
-#wrapper #prob-msg #cct-msg .msg-hold {
+.msg-hold {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly; }
-
-#wrapper #prob-msg #wng-msg, #wrapper #end-msg, #wrapper #end-msg #mis-qs {
-  width: 50%;
-  margin: 1rem auto;
-  border: 0.1rem solid black;
-  padding: .5rem; }
+  justify-content: space-around; }
 
 #wrapper #top #choose-num-form fieldset .container .check, #wrapper #top #choose-num-form fieldset .container .radio-b {
   position: absolute;
@@ -121,109 +115,164 @@ html, body {
         background: -o-linear-gradient(#28AA18, #238916);
         background: -moz-linear-gradient(#28AA18, #238916);
         background: linear-gradient(#28AA18, #238916); }
-#wrapper #progress-bars {
-  width: 50%;
-  margin: 3rem auto; }
-  #wrapper #progress-bars #score-board p {
-    text-align: center;
-    color: #333;
-    font-size: 1.25rem; }
-  #wrapper #progress-bars #round-holder, #wrapper #progress-bars #session-holder {
-    margin: 1rem auto;
-    background: green;
-    position: relative;
-    height: 1.5rem;
-    width: 80%;
-    overflow: hidden;
-    background: #C7C7C7;
-    background: -webkit-linear-gradient(#C7C7C7, #AAA);
-    background: -o-linear-gradient(#C7C7C7, #AAA);
-    background: -moz-linear-gradient(#C7C7C7, #AAA);
-    background: linear-gradient(#C7C7C7, #AAA); }
-    #wrapper #progress-bars #round-holder #round-mover, #wrapper #progress-bars #round-holder #session-mover, #wrapper #progress-bars #session-holder #round-mover, #wrapper #progress-bars #session-holder #session-mover {
-      background: red;
-      position: absolute;
-      left: 0%;
-      height: 100%;
-      width: 100%;
-      background: #4A4A4A; }
-    #wrapper #progress-bars #round-holder p, #wrapper #progress-bars #session-holder p {
-      z-index: 10;
-      position: absolute;
-      margin: 0;
-      left: .3rem;
-      top: .25rem;
-      font-weight: 100;
-      color: white;
-      text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2); }
-#wrapper #prob-div {
-  width: 100%;
-  margin: 2rem auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; }
-  #wrapper #prob-div #statement-holder {
-    width: 100%;
-    text-align: center; }
-    #wrapper #prob-div #statement-holder h2 {
-      margin: 0;
-      display: inline-block;
-      font-size: 2rem;
-      font-weight: 200;
-      color: #333; }
-    #wrapper #prob-div #statement-holder input {
-      width: 5rem;
+#wrapper #middle {
+  margin: 0;
+  padding: .5rem 0;
+  position: relative; }
+  #wrapper #middle #progress-bars {
+    width: 50%;
+    min-width: 20rem;
+    margin: 3rem auto 2.5rem; }
+    #wrapper #middle #progress-bars #score-board p {
       text-align: center;
-      display: inline-block;
-      font-weight: 200;
-      font-size: 2rem;
       color: #333;
-      border: .1rem solid #333; }
-  #wrapper #prob-div p {
-    display: inline-block;
+      font-size: 1.25rem; }
+    #wrapper #middle #progress-bars #round-holder, #wrapper #middle #progress-bars #session-holder {
+      margin: 1rem auto;
+      background: green;
+      position: relative;
+      height: 1.5rem;
+      width: 80%;
+      overflow: hidden;
+      background: #C7C7C7;
+      background: -webkit-linear-gradient(#C7C7C7, #AAA);
+      background: -o-linear-gradient(#C7C7C7, #AAA);
+      background: -moz-linear-gradient(#C7C7C7, #AAA);
+      background: linear-gradient(#C7C7C7, #AAA); }
+      #wrapper #middle #progress-bars #round-holder #round-mover, #wrapper #middle #progress-bars #round-holder #session-mover, #wrapper #middle #progress-bars #session-holder #round-mover, #wrapper #middle #progress-bars #session-holder #session-mover {
+        background: red;
+        position: absolute;
+        left: 0%;
+        height: 100%;
+        width: 100%;
+        background: #4A4A4A; }
+      #wrapper #middle #progress-bars #round-holder p, #wrapper #middle #progress-bars #session-holder p {
+        z-index: 10;
+        position: absolute;
+        margin: 0;
+        left: .3rem;
+        top: .25rem;
+        font-weight: 100;
+        color: white;
+        text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2); }
+  #wrapper #middle #prob-div {
     width: 100%;
-    text-align: center; }
-  #wrapper #prob-div #skip-button {
-    margin: 1rem auto;
-    font-size: 1rem;
-    width: 18rem;
-    height: 2rem;
-    display: block;
-    position: relative;
-    border: none;
-    color: #FAFAFA;
-    background: -webkit-linear-gradient(#868686, #323232);
-    background: -o-linear-gradient(#868686, #323232);
-    background: -moz-linear-gradient(#868686, #323232);
-    background: linear-gradient(#868686, #323232); }
-    #wrapper #prob-div #skip-button:hover {
-      color: #EEE;
-      background: -webkit-linear-gradient(#323232, #868686);
-      background: -o-linear-gradient(#323232, #868686);
-      background: -moz-linear-gradient(#323232, #868686);
-      background: linear-gradient(#323232, #868686); }
-    #wrapper #prob-div #skip-button:active {
+    margin: 1.5rem auto 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    #wrapper #middle #prob-div #statement-holder {
+      width: 100%;
+      text-align: center; }
+      #wrapper #middle #prob-div #statement-holder h2 {
+        margin: 0;
+        display: inline-block;
+        font-size: 2rem;
+        font-weight: 200;
+        color: #333; }
+      #wrapper #middle #prob-div #statement-holder input {
+        width: 5rem;
+        text-align: center;
+        display: inline-block;
+        font-weight: 200;
+        font-size: 2rem;
+        color: #333;
+        border: .1rem solid #333; }
+    #wrapper #middle #prob-div p {
+      display: inline-block;
+      width: 100%;
+      text-align: center; }
+    #wrapper #middle #prob-div #skip-button {
+      margin: 1rem auto;
+      font-size: 1rem;
+      width: 18rem;
+      height: 2rem;
+      display: block;
+      position: relative;
+      border: none;
       color: #FAFAFA;
       background: -webkit-linear-gradient(#868686, #323232);
       background: -o-linear-gradient(#868686, #323232);
       background: -moz-linear-gradient(#868686, #323232);
       background: linear-gradient(#868686, #323232); }
+      #wrapper #middle #prob-div #skip-button:hover {
+        color: #EEE;
+        background: -webkit-linear-gradient(#323232, #868686);
+        background: -o-linear-gradient(#323232, #868686);
+        background: -moz-linear-gradient(#323232, #868686);
+        background: linear-gradient(#323232, #868686); }
+      #wrapper #middle #prob-div #skip-button:active {
+        color: #FAFAFA;
+        background: -webkit-linear-gradient(#868686, #323232);
+        background: -o-linear-gradient(#868686, #323232);
+        background: -moz-linear-gradient(#868686, #323232);
+        background: linear-gradient(#868686, #323232); }
+  #wrapper #middle #end-msg {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: none;
+    position: absolute;
+    top: 0;
+    z-index: 20;
+    background: white; }
+    #wrapper #middle #end-msg h2 {
+      margin: 1rem 0 .5rem 0;
+      font-size: 3rem;
+      font-weight: 100;
+      color: #28A219;
+      width: 100%;
+      text-align: center; }
+    #wrapper #middle #end-msg p {
+      font-size: 1rem;
+      font-weight: 100;
+      color: #333;
+      text-align: center; }
+    #wrapper #middle #end-msg #mis-qs {
+      width: 14rem;
+      height: 8rem;
+      margin: 1rem auto;
+      border: .1rem solid #333;
+      overflow: scroll; }
+    #wrapper #middle #end-msg button {
+      margin: 1rem auto;
+      font-size: 1rem;
+      width: 12rem;
+      height: 2rem;
+      display: block;
+      position: relative;
+      border: none;
+      color: #FAFAFA;
+      background: -webkit-linear-gradient(#868686, #323232);
+      background: -o-linear-gradient(#868686, #323232);
+      background: -moz-linear-gradient(#868686, #323232);
+      background: linear-gradient(#868686, #323232); }
+      #wrapper #middle #end-msg button:hover {
+        color: #EEE;
+        background: -webkit-linear-gradient(#323232, #868686);
+        background: -o-linear-gradient(#323232, #868686);
+        background: -moz-linear-gradient(#323232, #868686);
+        background: linear-gradient(#323232, #868686); }
+      #wrapper #middle #end-msg button:active {
+        color: #FAFAFA;
+        background: -webkit-linear-gradient(#868686, #323232);
+        background: -o-linear-gradient(#868686, #323232);
+        background: -moz-linear-gradient(#868686, #323232);
+        background: linear-gradient(#868686, #323232); }
 #wrapper #prob-msg {
   width: 100%;
-  height: 10rem;
+  height: 6.5rem;
+  padding: 1.25rem 0 0 0;
   background: #646464; }
   #wrapper #prob-msg #cct-msg {
-    display: none;
-    width: 20%;
-    margin: 1rem auto;
-    border: 0.1rem solid black; }
+    display: none; }
     #wrapper #prob-msg #cct-msg .msg-hold #cct-circle {
       height: 4rem;
       width: 4rem;
-      margin: 1rem;
-      background: #28AA18;
+      margin: .5rem;
       border-radius: 50%;
-      position: relative; }
+      position: relative;
+      background: #28AA18; }
       #wrapper #prob-msg #cct-msg .msg-hold #cct-circle:after {
         content: "";
         position: absolute;
@@ -237,21 +286,44 @@ html, body {
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg); }
-    #wrapper #prob-msg #cct-msg .msg-hold #test {
+    #wrapper #prob-msg #cct-msg .msg-hold h2 {
+      align-self: center;
       display: block;
       color: white;
-      margin: 1rem;
       font-size: 1.5rem;
       font-weight: 100; }
   #wrapper #prob-msg #wng-msg {
     display: none; }
-#wrapper #end-msg {
-  display: none; }
+    #wrapper #prob-msg #wng-msg .msg-hold #wng-circle {
+      height: 4rem;
+      width: 4rem;
+      margin: .5rem;
+      border-radius: 50%;
+      position: relative;
+      background: #E63838; }
+      #wrapper #prob-msg #wng-msg .msg-hold #wng-circle #x-mark {
+        color: white;
+        position: absolute;
+        font-size: 3rem;
+        top: .35rem;
+        left: 1rem;
+        margin: 0;
+        padding: 0;
+        transform: scale(1.3, 1); }
+    #wrapper #prob-msg #wng-msg .msg-hold h2 {
+      align-self: center;
+      display: block;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 100; }
 
 .mult {
   vertical-align: -.5rem;
   line-height: 10%;
   margin: 0;
   padding: 0; }
+
+.msg-hold {
+  justify-content: center; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -135,7 +135,7 @@ var timesTable = {
       this.showScore();
       document.getElementById("end-msg").style.display = "block"; 
       if (this.missedQs.innerHTML === "") { // if wrong answers is empty, display congratulations message
-        this.missedQs.innerHTML = "<p>None, great job!</p>";  
+        this.missedQs.innerHTML = "<p>You didn't make any,<br />great job!</p>";  
       }
 
 
@@ -199,7 +199,7 @@ skip.addEventListener("click", function() {
 });
 
 // clears input field 
-uInput.addEventListener("click", function() {
+uInput.addEventListener("focus", function() {
   uInput.value = "";
 });
 
