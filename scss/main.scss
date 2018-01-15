@@ -273,8 +273,9 @@ html, body {
         width: 14rem;
         height: 7rem;
         margin: .5rem auto;
-        border: .1rem solid #333;
-        overflow: scroll;
+        border: .2rem solid #333;
+        overflow-y: scroll;
+        padding: .1rem 0 0 0;
       }
       button {
         @include button(#868686, #323232, 12rem);    
