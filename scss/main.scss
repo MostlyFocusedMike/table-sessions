@@ -256,7 +256,7 @@ html, body {
       background: white;
       animation: fade-in 500ms linear 600ms both;
       h2 {
-        margin: 1rem 0 .5rem 0;
+        margin: 1rem 0 .25rem 0;
         font-size: 3rem;
         font-weight: 100;
         color: #28A219;
@@ -266,12 +266,13 @@ html, body {
       p {
         font-size: 1rem;
         font-weight: 100;
+        margin: .5rem;
         color: #333;
         text-align: center; 
       }
       #mis-qs {
         width: 14rem;
-        height: 7rem;
+        height: 6rem;
         margin: .5rem auto;
         border: .2rem solid #333;
         overflow-y: scroll;

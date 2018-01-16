@@ -41,7 +41,7 @@
 
     <div id="middle">
       <div id="score-board">
-        <p>Score: <span class="fin-score">??/??</span></p>
+        <p>Score: <span class="fin-score">0%</span></p>
       </div>
 
       <div id="prob-div">
@@ -69,7 +69,8 @@
       
       <div id="end-msg">
         <h2>Session Completed!<h2>
-        <p>Your score: <span class="fin-score">??/??</span></p>
+        <p>Your Score: <span class="fin-score">0%</span></p>
+        <p>Total Correct Questions: <span id="tot-q">??/??</span></p>
         <p>Misses:</p>
         <div id="mis-qs">
         </div>
@@ -183,6 +184,8 @@
         </fieldset>
         
         <button type="submit" id="start-button">Start New Session</button>
+        <button type="submit" id="seq-button">In Order</button>
+        <button type="submit" id="rand-button">Random</button>
       </div>
     </div>
 
