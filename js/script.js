@@ -8,11 +8,20 @@
 (function () {
 "use strict"
 var timesTable = {
-  includedNum: [], usedNum: [], startRound: 1, x: 1, y: 1, qNum: 0,
+  includedNum: [], 
+  usedNum: [], 
+  startRound: 1,
+  x: 1, 
+  y: 1, 
   xEl: document.getElementById ("x-id"),
   yEl: document.getElementById("y-id"),
-  xList: [],
-  yList: [],
+  qNum: 0,
+  qRank: 1,
+  qOrder: [],
+  pairs: {},
+  correct: 0,
+  totalPoints: 0,
+  sessionMode: "random",
   endMsg: document.getElementById("end-msg"),
   cctMsg: document.getElementById('cct-msg'),
   wngMsg: document.getElementById('wng-msg'),
@@ -20,14 +29,12 @@ var timesTable = {
   roundBar: document.getElementById("round-mover"),
   sessionBar: document.getElementById("session-mover"),
   missedQs: document.getElementById("mis-qs"),
-  correct: 0,
-  totalPoints: 0,
-  sessionMode: "random",
   setupRound: function() {
   // set up the round start number and what numbers to include
     var radios = document.getElementsByName("start-round"),
       checks = document.getElementsByName("include-num");
-      this.includedNum.length = 0; // resets includedNum array to prevent the entries from stacking up from previous sessions/rounds
+    // resets includedNum array to prevent the entries from stacking up from previous sessions
+      this.includedNum.length = 0; 
     for (var i = 0; i < 12; i++) {
       if (radios[i].checked) {
         this.startRound = Number(radios[i].value);
@@ -46,6 +53,21 @@ var timesTable = {
       this.showScore();
     }
   },
+  reset: function() {
+    this.usedNum.length = 0;
+    this.correct = 0;
+    this.qNum = 0;
+    this.qRank = 1,
+    this.qOrder = [],
+    this.pairs = {},
+    this.wlcMsg.style.display = "block";
+    this.cctMsg.style.display = "none";
+    this.wngMsg.style.display = "none";
+    this.endMsg.style.display = "none";
+    this.roundBar.style.left = "0";
+    this.sessionBar.style.left = "0";
+    this.missedQs.innerHTML = ""; 
+  },
   initialSetup: function() {
   // sets up the x,y variables and html content, and the total points
     // set the x and y html content
@@ -54,27 +76,13 @@ var timesTable = {
     if (this.sessionMode == "sequence") {
       this.xEl.textContent = this.startRound;
       this.yEl.textContent = this.includedNum[0];
-      // set the x and y variable values 
+      // set the x and y variable values
       this.x = this.startRound;
       this.y = this.includedNum[0];
     } else {
       this.randomXY();
-      this.nextRandomQ(); 
+      this.nextRandomQ();
     }
-  },
-  reset: function() {
-    this.usedNum.length = 0;
-    this.correct = 0;
-    this.qNum = 0;
-    this.xList.length = 0;
-    this.yList.length = 0;
-    this.wlcMsg.style.display = "block";
-    this.cctMsg.style.display = "none";
-    this.wngMsg.style.display = "none";
-    this.endMsg.style.display = "none";
-    this.roundBar.style.left = "0";
-    this.sessionBar.style.left = "0";
-    this.missedQs.innerHTML = ""; 
   },
   checkAnswer: function() {
   // compares user answer and shows a correct or wrong message, adds score
@@ -120,7 +128,7 @@ var timesTable = {
       } else {
         this.nextRound();
       }
-    } else {
+    } else { // sessionMode set to random
       if (this.qNum < this.totalPoints) {
         this.nextRandomQ();
       } else {
@@ -195,7 +203,6 @@ var timesTable = {
     var scoreEl = document.getElementsByClassName("fin-score"), 
       score = this.correct / this.qNum * 100;
       score = score.toFixed(0);
-
     if (isNaN(score)) {
       score = 100;
     }
@@ -210,25 +217,41 @@ var timesTable = {
     this.roundBar.style.left = rouPosVal + "%"; 
   },
   randomXY: function() {
-    var includeLength = this.includedNum.length, i, k;
-    for (i=0;i<includeLength;i++) {
-      for (k=0;k<includeLength;k++) {
-        this.xList.push(this.includedNum[k]);
-        this.yList.push(this.includedNum[k]);
+    // create an object that goes:
+    // {questionRank: [xValue, yValue]}
+    // {1: [1,1], 2: [1,2], 3: [1,3]...} as you see it goes up all included tables
+    // if a num is skiped by user, that times table is skipped
+    // so includedNum [2,3,4,6] would skip all 1 values and 5 values, then stop
+    // next create an array that's just each question number
+    // so 4 questions long is an array of [1, 2, 3, 4]
+    var incLength = this.includedNum.length, i, k;
+
+    for (i=0;i<incLength;i++) {
+      for (k=0;k<incLength;k++) {
+        this.pairs[this.qRank] = [this.includedNum[i],this.includedNum[k]];
+        this.qOrder.push(this.qRank);
+        this.qRank += 1; // be sure to add count to qOrder BEFORE increasing by one
+                    // otherwise, the range will be off later by 1
       }
     }
-    this.xList.sort(function(a, b){return 0.5 - Math.random()});
-    this.yList.sort(function(a, b){return 0.5 - Math.random()});
+
+    // now pairs has the times table in perfect order,
+    // instead of randomizing that, we'll randomize the qOrder itselft
+    this.qOrder.sort(function(a, b){return 0.5 - Math.random()});
   },
   nextRandomQ: function() {
-    this.x = this.xList[this.qNum];
-    this.y = this.yList[this.qNum];
+    // our qNum is simulated by a for loop here
+    // as qNum goes up, it will call the next index value of qOrder
+    // which is randomized, and will call its corresponding question from
+    // the pairs object, which will give us our x and y value:
+    this.x = this.pairs[this.qOrder[this.qNum]][0];
+    this.y = this.pairs[this.qOrder[this.qNum]][1];
     this.xEl.textContent = this.x;
     this.yEl.textContent = this.y;
+    console.log("q#" + this.qNum + " x=" + this.x + " y=" + this.y);
   }
 }; // don't forget to use ; after objects
 
-// the skip_round function just has to 
 
 // MAIN PROGRAM BELOW /////////////////////////////////////////////////
 // /////////////////////////////////////////////////
