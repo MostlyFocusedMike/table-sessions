@@ -28,7 +28,7 @@ $bd: .1rem solid black;
 } 
 
 
-@mixin button($cl1, $cl2, $wide) {
+@mixin button($cl1, $bgcl1, $bgcl2, $wide) {
   margin: 1rem auto;
   font-size: 1rem;
   width: $wide;
@@ -36,15 +36,15 @@ $bd: .1rem solid black;
   display: block;
   position: relative;
   border: none;
-  color: #FAFAFA;
-  @include grad($cl1, $cl2);
+  color: $cl1;
+  @include grad($bgcl1, $bgcl2);
   &:hover {
-    color: #EEE;
-    @include grad($cl2, $cl1);
+    color: $cl1;
+    @include grad($bgcl2, $bgcl1);
   }
   &:active {
-    color: #FAFAFA;
-    @include grad($cl1, $cl2);
+    color: $cl1;
+    @include grad($bgcl1, $bgcl2);
   }
 }
 
@@ -242,7 +242,7 @@ html, body {
         text-align: center;
       }
       #skip-button {
-        @include button(#868686, #323232, 18rem);    
+        @include button(#FAFAFA, #868686, #323232, 18rem);    
       }
     }
     #end-msg {
@@ -279,90 +279,137 @@ html, body {
         padding: .1rem 0 0 0;
       }
       button {
-        @include button(#868686, #323232, 12rem);    
+        @include button(#FAFAFA,#868686, #323232, 12rem);    
       }
     }
   }
   #bottom {
-    #choose-num-form {
-      margin: 0 auto;
-      fieldset {
-        width: 85%;
-        max-width: 40rem;
-        margin: 1rem auto;
-        text-align: center;
-        color: #FAFAFA;
-        border: 2px solid #c7c7c7;
-        legend {
-          color: white;
-          text-align: left;
-          font-weight: 100;
-        }
-        .container { // this holds everything that we're making 
-          display: inline-block;
-          position: relative;
-          margin: .1rem 0;
-          padding-left: 30px;
-          font-size: 22px;
-          color: white;
-          -webkit-user-select: none;
-          -moz-user-select: none; // users can't highlight the numbers 
-          -ms-user-select: none;
-          user-select: none;
-          transform: scale(.7); 
-          // On mouse-over, add a grey background color
-          &:hover input ~ .radio-b, &:hover input ~ .check   {      
-            background-color: #ccc;
-          }
-          input {     //  Hide the browser's default radio button
-            position: absolute;
-            opacity: 0;
-            // When the radio button is checked, add a green background 
-            &:checked ~ .radio-b, &:checked ~ .check { 
-              background-color: #28AA18;
-            }
-            // also show the dot or the check mark when checked
-            &:checked ~ .radio-b:after, &:checked ~ .check:after { // white circle
-              display: block;
-            }
-          }
-          .check { // .check is the check box 
-            @extend %check-basic;
-            &:after { // this is the actual check itself
-              content: "";
-              position: absolute;
-              display: none;
-              left: 9px;
-              top: 5px;
-              width: 5px;
-              height: 10px;
-              border: solid white;
-              border-width: 0 3px 3px 0;
-              -webkit-transform: rotate(45deg);
-              -ms-transform: rotate(45deg);
-              transform: rotate(45deg);
-            }
-          }
-          .radio-b {     // Create a custom radio button 
-            @extend %check-basic;
-            border-radius: 50%;
-            &:after { // th white dot that appears in the center
-              content: "";
-              position: absolute;
-              display: none;
-              top: 9px;
-              left: 9px;
-              width: 8px;
-              height: 8px;
-              border-radius: 50%;
-              background: white;
-              border-radius: 50%;
-            }
-          }
-        }
+    #create-box {
+      width: 97%;
+      max-width: 45rem;
+      margin: 1rem auto;
+      border: .1rem solid #C7C7C7;
+      display: block;
+      #create-button {
+        @include button(#FAFAFA,#28AA18, #238916,20rem);
       }
-      #start-button {
-        @include button(#28AA18, #238916,20rem);
+    }
+    #cnf-holder { // this is just so choose-num-form can have display flex
+      display: none;
+      width: 100%;
+
+      #choose-num-form {
+        width: 97%;
+        max-width: 45rem;
+        margin: 1rem auto;
+        border: .1rem solid #C7C7C7;
+        position: relative;
+        @extend %basic-flex;
+        p {
+          width: 100%;
+          color: white;
+          font-weight: 100;
+          margin: 1.5rem 0 0 .5rem;
+          text-align: center;
+        }
+        #close-button {
+          position: absolute;
+          padding: .25rem .5rem;
+          border: none;
+          color: #C7C7C7;
+          font-size: 1.5rem;
+          background: #646464;
+          top: 0;
+          right: 0;
+        }
+        div {
+          width: 100%;
+          @extend %basic-flex;
+          justify-content: center;
+          button {
+            @include button(#333,#D8D8D8,#8E8E8E,9rem);
+            color: #333;
+            margin: .5rem;  
+          }
+        }
+        fieldset {
+          margin: 1rem auto;
+          width: 90%;
+          max-width: 37rem;
+          text-align: center;
+          color: #FAFAFA;
+          border: 2px solid #c7c7c7;
+          legend {
+            color: white;
+            text-align: left;
+            font-weight: 100;
+          }
+          .container { // this holds everything that we're making 
+            display: inline-block;
+            position: relative;
+            margin: .1rem 0;
+            padding-left: 30px;
+            font-size: 22px;
+            color: white;
+            -webkit-user-select: none;
+            -moz-user-select: none; // users can't highlight the numbers 
+            -ms-user-select: none;
+            user-select: none;
+            transform: scale(.7); 
+            // On mouse-over, add a grey background color
+            &:hover input ~ .radio-b, &:hover input ~ .check   {      
+              background-color: #ccc;
+            }
+            input {     //  Hide the browser's default radio button
+              position: absolute;
+              opacity: 0;
+              // When the radio button is checked, add a green background 
+              &:checked ~ .radio-b, &:checked ~ .check { 
+                background-color: #28AA18;
+              }
+              // also show the dot or the check mark when checked
+              &:checked ~ .radio-b:after, &:checked ~ .check:after { // white circle
+                display: block;
+              }
+            }
+            .check { // .check is the check box 
+              @extend %check-basic;
+              &:after { // this is the actual check itself
+                content: "";
+                position: absolute;
+                display: none;
+                left: 9px;
+                top: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+              }
+            }
+            .radio-b {     // Create a custom radio button 
+              @extend %check-basic;
+              border-radius: 50%;
+              &:after { // th white dot that appears in the center
+                content: "";
+                position: absolute;
+                display: none;
+                top: 9px;
+                left: 9px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: white;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+        #start-button {
+          @include button(#FAFAFA,#28AA18, #238916,20rem);
+        }
       }
     }
   }

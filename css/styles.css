@@ -1,10 +1,10 @@
-#wrapper #top #prob-msg, .msg-hold {
+#wrapper #top #prob-msg, #wrapper #bottom #cnf-holder #choose-num-form, #wrapper #bottom #cnf-holder #choose-num-form div, .msg-hold {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-around; }
 
-#wrapper #bottom #choose-num-form fieldset .container .check, #wrapper #bottom #choose-num-form fieldset .container .radio-b {
+#wrapper #bottom #cnf-holder #choose-num-form fieldset .container .check, #wrapper #bottom #cnf-holder #choose-num-form fieldset .container .radio-b {
   position: absolute;
   top: 0;
   left: 0;
@@ -181,7 +181,7 @@ html, body {
       background: -moz-linear-gradient(#868686, #323232);
       background: linear-gradient(#868686, #323232); }
       #wrapper #middle #prob-div #skip-button:hover {
-        color: #EEE;
+        color: #FAFAFA;
         background: -webkit-linear-gradient(#323232, #868686);
         background: -o-linear-gradient(#323232, #868686);
         background: -moz-linear-gradient(#323232, #868686);
@@ -236,7 +236,7 @@ html, body {
       background: -moz-linear-gradient(#868686, #323232);
       background: linear-gradient(#868686, #323232); }
       #wrapper #middle #end-msg button:hover {
-        color: #EEE;
+        color: #FAFAFA;
         background: -webkit-linear-gradient(#323232, #868686);
         background: -o-linear-gradient(#323232, #868686);
         background: -moz-linear-gradient(#323232, #868686);
@@ -247,67 +247,13 @@ html, body {
         background: -o-linear-gradient(#868686, #323232);
         background: -moz-linear-gradient(#868686, #323232);
         background: linear-gradient(#868686, #323232); }
-#wrapper #bottom #choose-num-form {
-  margin: 0 auto; }
-  #wrapper #bottom #choose-num-form fieldset {
-    width: 85%;
-    max-width: 40rem;
-    margin: 1rem auto;
-    text-align: center;
-    color: #FAFAFA;
-    border: 2px solid #c7c7c7; }
-    #wrapper #bottom #choose-num-form fieldset legend {
-      color: white;
-      text-align: left;
-      font-weight: 100; }
-    #wrapper #bottom #choose-num-form fieldset .container {
-      display: inline-block;
-      position: relative;
-      margin: .1rem 0;
-      padding-left: 30px;
-      font-size: 22px;
-      color: white;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      transform: scale(0.7); }
-      #wrapper #bottom #choose-num-form fieldset .container:hover input ~ .radio-b, #wrapper #bottom #choose-num-form fieldset .container:hover input ~ .check {
-        background-color: #ccc; }
-      #wrapper #bottom #choose-num-form fieldset .container input {
-        position: absolute;
-        opacity: 0; }
-        #wrapper #bottom #choose-num-form fieldset .container input:checked ~ .radio-b, #wrapper #bottom #choose-num-form fieldset .container input:checked ~ .check {
-          background-color: #28AA18; }
-        #wrapper #bottom #choose-num-form fieldset .container input:checked ~ .radio-b:after, #wrapper #bottom #choose-num-form fieldset .container input:checked ~ .check:after {
-          display: block; }
-      #wrapper #bottom #choose-num-form fieldset .container .check:after {
-        content: "";
-        position: absolute;
-        display: none;
-        left: 9px;
-        top: 5px;
-        width: 5px;
-        height: 10px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg); }
-      #wrapper #bottom #choose-num-form fieldset .container .radio-b {
-        border-radius: 50%; }
-        #wrapper #bottom #choose-num-form fieldset .container .radio-b:after {
-          content: "";
-          position: absolute;
-          display: none;
-          top: 9px;
-          left: 9px;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: white;
-          border-radius: 50%; }
-  #wrapper #bottom #choose-num-form #start-button {
+#wrapper #bottom #create-box {
+  width: 97%;
+  max-width: 45rem;
+  margin: 1rem auto;
+  border: .1rem solid #C7C7C7;
+  display: block; }
+  #wrapper #bottom #create-box #create-button {
     margin: 1rem auto;
     font-size: 1rem;
     width: 20rem;
@@ -320,18 +266,155 @@ html, body {
     background: -o-linear-gradient(#28AA18, #238916);
     background: -moz-linear-gradient(#28AA18, #238916);
     background: linear-gradient(#28AA18, #238916); }
-    #wrapper #bottom #choose-num-form #start-button:hover {
-      color: #EEE;
+    #wrapper #bottom #create-box #create-button:hover {
+      color: #FAFAFA;
       background: -webkit-linear-gradient(#238916, #28AA18);
       background: -o-linear-gradient(#238916, #28AA18);
       background: -moz-linear-gradient(#238916, #28AA18);
       background: linear-gradient(#238916, #28AA18); }
-    #wrapper #bottom #choose-num-form #start-button:active {
+    #wrapper #bottom #create-box #create-button:active {
       color: #FAFAFA;
       background: -webkit-linear-gradient(#28AA18, #238916);
       background: -o-linear-gradient(#28AA18, #238916);
       background: -moz-linear-gradient(#28AA18, #238916);
       background: linear-gradient(#28AA18, #238916); }
+#wrapper #bottom #cnf-holder {
+  display: none;
+  width: 100%; }
+  #wrapper #bottom #cnf-holder #choose-num-form {
+    width: 97%;
+    max-width: 45rem;
+    margin: 1rem auto;
+    border: .1rem solid #C7C7C7;
+    position: relative; }
+    #wrapper #bottom #cnf-holder #choose-num-form p {
+      width: 100%;
+      color: white;
+      font-weight: 100;
+      margin: 1.5rem 0 0 .5rem;
+      text-align: center; }
+    #wrapper #bottom #cnf-holder #choose-num-form #close-button {
+      position: absolute;
+      padding: .25rem .5rem;
+      border: none;
+      color: #C7C7C7;
+      font-size: 1.5rem;
+      background: #646464;
+      top: 0;
+      right: 0; }
+    #wrapper #bottom #cnf-holder #choose-num-form div {
+      width: 100%;
+      justify-content: center; }
+      #wrapper #bottom #cnf-holder #choose-num-form div button {
+        margin: 1rem auto;
+        font-size: 1rem;
+        width: 9rem;
+        height: 2rem;
+        display: block;
+        position: relative;
+        border: none;
+        color: #333;
+        background: -webkit-linear-gradient(#D8D8D8, #8E8E8E);
+        background: -o-linear-gradient(#D8D8D8, #8E8E8E);
+        background: -moz-linear-gradient(#D8D8D8, #8E8E8E);
+        background: linear-gradient(#D8D8D8, #8E8E8E);
+        color: #333;
+        margin: .5rem; }
+        #wrapper #bottom #cnf-holder #choose-num-form div button:hover {
+          color: #333;
+          background: -webkit-linear-gradient(#8E8E8E, #D8D8D8);
+          background: -o-linear-gradient(#8E8E8E, #D8D8D8);
+          background: -moz-linear-gradient(#8E8E8E, #D8D8D8);
+          background: linear-gradient(#8E8E8E, #D8D8D8); }
+        #wrapper #bottom #cnf-holder #choose-num-form div button:active {
+          color: #333;
+          background: -webkit-linear-gradient(#D8D8D8, #8E8E8E);
+          background: -o-linear-gradient(#D8D8D8, #8E8E8E);
+          background: -moz-linear-gradient(#D8D8D8, #8E8E8E);
+          background: linear-gradient(#D8D8D8, #8E8E8E); }
+    #wrapper #bottom #cnf-holder #choose-num-form fieldset {
+      margin: 1rem auto;
+      width: 90%;
+      max-width: 37rem;
+      text-align: center;
+      color: #FAFAFA;
+      border: 2px solid #c7c7c7; }
+      #wrapper #bottom #cnf-holder #choose-num-form fieldset legend {
+        color: white;
+        text-align: left;
+        font-weight: 100; }
+      #wrapper #bottom #cnf-holder #choose-num-form fieldset .container {
+        display: inline-block;
+        position: relative;
+        margin: .1rem 0;
+        padding-left: 30px;
+        font-size: 22px;
+        color: white;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        transform: scale(0.7); }
+        #wrapper #bottom #cnf-holder #choose-num-form fieldset .container:hover input ~ .radio-b, #wrapper #bottom #cnf-holder #choose-num-form fieldset .container:hover input ~ .check {
+          background-color: #ccc; }
+        #wrapper #bottom #cnf-holder #choose-num-form fieldset .container input {
+          position: absolute;
+          opacity: 0; }
+          #wrapper #bottom #cnf-holder #choose-num-form fieldset .container input:checked ~ .radio-b, #wrapper #bottom #cnf-holder #choose-num-form fieldset .container input:checked ~ .check {
+            background-color: #28AA18; }
+          #wrapper #bottom #cnf-holder #choose-num-form fieldset .container input:checked ~ .radio-b:after, #wrapper #bottom #cnf-holder #choose-num-form fieldset .container input:checked ~ .check:after {
+            display: block; }
+        #wrapper #bottom #cnf-holder #choose-num-form fieldset .container .check:after {
+          content: "";
+          position: absolute;
+          display: none;
+          left: 9px;
+          top: 5px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 3px 3px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg); }
+        #wrapper #bottom #cnf-holder #choose-num-form fieldset .container .radio-b {
+          border-radius: 50%; }
+          #wrapper #bottom #cnf-holder #choose-num-form fieldset .container .radio-b:after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            border-radius: 50%; }
+    #wrapper #bottom #cnf-holder #choose-num-form #start-button {
+      margin: 1rem auto;
+      font-size: 1rem;
+      width: 20rem;
+      height: 2rem;
+      display: block;
+      position: relative;
+      border: none;
+      color: #FAFAFA;
+      background: -webkit-linear-gradient(#28AA18, #238916);
+      background: -o-linear-gradient(#28AA18, #238916);
+      background: -moz-linear-gradient(#28AA18, #238916);
+      background: linear-gradient(#28AA18, #238916); }
+      #wrapper #bottom #cnf-holder #choose-num-form #start-button:hover {
+        color: #FAFAFA;
+        background: -webkit-linear-gradient(#238916, #28AA18);
+        background: -o-linear-gradient(#238916, #28AA18);
+        background: -moz-linear-gradient(#238916, #28AA18);
+        background: linear-gradient(#238916, #28AA18); }
+      #wrapper #bottom #cnf-holder #choose-num-form #start-button:active {
+        color: #FAFAFA;
+        background: -webkit-linear-gradient(#28AA18, #238916);
+        background: -o-linear-gradient(#28AA18, #238916);
+        background: -moz-linear-gradient(#28AA18, #238916);
+        background: linear-gradient(#28AA18, #238916); }
 
 .mult {
   vertical-align: -.5rem;

@@ -253,6 +253,12 @@ var timesTable = {
 }; // don't forget to use ; after objects
 
 
+function toggleBoxes() {
+  // toggle display on or off 
+  var boxes = [document.getElementById("create-box"), document.getElementById("cnf-holder")], i;
+  boxes[0].style.display = boxes[0].style.display === 'none' ? 'block' : 'none'; // remember that's      condition ? (if true) : (if false);
+  boxes[1].style.display = boxes[1].style.display === 'block' ? 'none' : 'block';
+};
 // MAIN PROGRAM BELOW /////////////////////////////////////////////////
 // /////////////////////////////////////////////////
 
@@ -264,12 +270,21 @@ var timesTable = {
 
 var start = document.getElementById("start-button"),
   skip = document.getElementById("skip-button"),
+
   uInput = document.getElementById("u-ans");
 
+document.getElementById("create-button").addEventListener("click", function() { 
+  toggleBoxes();  
+  window.scrollBy(0, 400); // keeps the new menu in window when it pops up
+});
+document.getElementById("close-button").addEventListener("click", function() { 
+  toggleBoxes();  
+});
 // start practice session
 start.addEventListener("click", function() { 
   timesTable.initialSetup();
   uInput.value = "";
+  toggleBoxes();
 });
 
 // skip round 
