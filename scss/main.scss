@@ -244,6 +244,9 @@ html, body {
       #skip-button {
         @include button(#FAFAFA, #868686, #323232, 18rem);    
       }
+      #end-button {
+        @include button(#FAFAFA, #868686, #323232, 18rem);    
+      }
     }
     #end-msg {
       width: 100%;
@@ -254,7 +257,7 @@ html, body {
       top: 0;
       z-index: 20;
       background: white;
-      animation: fade-in 500ms linear 600ms both;
+      animation: fade-in 500ms linear 300ms both;
       h2 {
         margin: 1rem 0 .25rem 0;
         font-size: 3rem;

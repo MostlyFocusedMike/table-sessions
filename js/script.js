@@ -73,6 +73,7 @@ var timesTable = {
     // set the x and y html content
     this.reset();
     this.setupRound();
+    this.setupField();
     if (this.sessionMode == "sequence") {
       this.xEl.textContent = this.startRound;
       this.yEl.textContent = this.includedNum[0];
@@ -121,10 +122,9 @@ var timesTable = {
   },
   setupNextQ: function() {
   // set up all but initial question for the x and Y html content
-    alert(this.sessionMode);
     if (this.sessionMode == "sequence") {
       this.usedNum.push(this.y);
-      if ((this.usedNum.length < this.includedNum.length) && (this.usedNum.length !== 1)) {
+      if ((this.usedNum.length < this.includedNum.length)) {
         this.randomY(); 
       } else {
         this.nextRound();
@@ -150,7 +150,7 @@ var timesTable = {
   nextRound: function() {
   //allows user to skip a round, or progress naturally
     this.x += 1;
-    while (this.includedNum.includes(this.x) == false) {
+    while (!(this.includedNum.includes(this.x))) {
       if (this.x == 13) {
         break;
       }
@@ -170,13 +170,15 @@ var timesTable = {
     this.adjustBars(); // knocks the round bar back down
   },
   adjustScore: function() {
-  // if user skips a round, this ensures totalPoints goes down as well, and keeps totalPoints from 
-  // changing if the endMsg is visibile ie round over
+    // if user skips a round, this ensures totalPoints goes down as well, and keeps totalPoints from 
+    // changing if the endMsg is visibile ie round over
     if (this.sessionMode == "sequence") {
       if ((this.usedNum.length !== this.includedNum.length) && (this.endMsg.style.display === "none")){
         var scoreAdjuster = this.includedNum.length - this.usedNum.length;
         this.totalPoints -= scoreAdjuster;
-      }
+      } 
+    } else {
+      this.totalPoints = this.qNum;
     }
   },
   end: function() {
@@ -205,7 +207,7 @@ var timesTable = {
       score = this.correct / this.qNum * 100;
       score = score.toFixed(0);
     if (isNaN(score)) {
-      score = 100;
+      score = 0;
     }
     for (var i=0; i<scoreEl.length; i++) {
       scoreEl[i].textContent = score + "%"; 
@@ -258,6 +260,24 @@ var timesTable = {
       document.getElementById("session-type").textContent = "Randomly"; 
     } else {
       document.getElementById("session-type").textContent = "In Order"; 
+    }
+  },
+  setupField: function() {
+  // show or hide various elements depending on the session mode
+    var seqEl = document.getElementsByClassName("seq-el"),
+      randEl = document.getElementById("end-button"), // there's only one element unique to random mode
+      seqElLength = seqEl.length, i;
+    if (this.sessionMode === "sequence") {
+      for (i=0;i<seqElLength;i++) {
+        seqEl[i].style.display = "block";
+      }
+      randEl.style.display = "none";
+      window.scrollBy(0, 400); // keeps the new menu in window when it pops up
+    } else {
+      for (i=0;i<seqElLength;i++) {
+        seqEl[i].style.display = "none";
+      }
+      randEl.style.display = "block";
     }
   }
 }; // don't forget to use ; after objects
@@ -317,10 +337,13 @@ uInput.addEventListener('keypress', function (e) {
     var key = e.which || e.keyCode; // certain browsers use e.which for keypress id-ing, others use e.keyCode
     if (key === 13) { // 13="enter" key
       timesTable.checkAnswer();
-      alert(timesTable.sessionMode);
     }
 });
 
+
+document.getElementById("end-button").addEventListener("click", function() {
+  timesTable.end();
+});
 // hide end message and reset new round 
 document.getElementById("hide-end").addEventListener("click", function() {
   document.getElementById("end-msg").style.display = "none";
@@ -330,10 +353,12 @@ document.getElementById("hide-end").addEventListener("click", function() {
 // change to rand
 document.getElementById("random").addEventListener("click", function() {
   timesTable.setMode(); 
+  timesTable.initialSetup();
 });
 // change to seq
 document.getElementById("sequence").addEventListener("click", function() {
   timesTable.setMode();
+  timesTable.initialSetup();
 });
 
 
