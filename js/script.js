@@ -21,7 +21,7 @@ var timesTable = {
   pairs: {},
   correct: 0,
   totalPoints: 0,
-  sessionMode: "random",
+  sessionMode: "sequence",
   endMsg: document.getElementById("end-msg"),
   cctMsg: document.getElementById('cct-msg'),
   wngMsg: document.getElementById('wng-msg'),
@@ -121,6 +121,7 @@ var timesTable = {
   },
   setupNextQ: function() {
   // set up all but initial question for the x and Y html content
+    alert(this.sessionMode);
     if (this.sessionMode == "sequence") {
       this.usedNum.push(this.y);
       if ((this.usedNum.length < this.includedNum.length) && (this.usedNum.length !== 1)) {
@@ -249,6 +250,15 @@ var timesTable = {
     this.xEl.textContent = this.x;
     this.yEl.textContent = this.y;
     console.log("q#" + this.qNum + " x=" + this.x + " y=" + this.y);
+  },
+  setMode: function(e) {
+    var setting = event.target.id;
+    this.sessionMode = setting;
+    if (setting == "random") {
+      document.getElementById("session-type").textContent = "Randomly"; 
+    } else {
+      document.getElementById("session-type").textContent = "In Order"; 
+    }
   }
 }; // don't forget to use ; after objects
 
@@ -280,6 +290,8 @@ document.getElementById("create-button").addEventListener("click", function() {
 document.getElementById("close-button").addEventListener("click", function() { 
   toggleBoxes();  
 });
+
+
 // start practice session
 start.addEventListener("click", function() { 
   timesTable.initialSetup();
@@ -305,6 +317,7 @@ uInput.addEventListener('keypress', function (e) {
     var key = e.which || e.keyCode; // certain browsers use e.which for keypress id-ing, others use e.keyCode
     if (key === 13) { // 13="enter" key
       timesTable.checkAnswer();
+      alert(timesTable.sessionMode);
     }
 });
 
@@ -315,13 +328,12 @@ document.getElementById("hide-end").addEventListener("click", function() {
 });
 
 // change to rand
-document.getElementById("rand-button").addEventListener("click", function() {
-  
-  timesTable.sessionMode = "random";
+document.getElementById("random").addEventListener("click", function() {
+  timesTable.setMode(); 
 });
 // change to seq
-document.getElementById("seq-button").addEventListener("click", function() {
-  timesTable.sessionMode = "sequence";
+document.getElementById("sequence").addEventListener("click", function() {
+  timesTable.setMode();
 });
 
 
