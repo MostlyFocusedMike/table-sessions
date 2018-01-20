@@ -1,12 +1,13 @@
 /*jslint plusplus: true*/
 /*jslint white: true*/
 /*globals $:false */
+/*jslint bitwise: false*/
 
 // DON'T FORGET A POLYFILL FOR THE INCLUDES METHOG
 // OK??
 
 (function () {
-"use strict"
+"use strict";
 var timesTable = {
   includedNum: [], 
   usedNum: [], 
@@ -32,34 +33,28 @@ var timesTable = {
   setupRound: function() {
   // set up the round start number and what numbers to include
     var radios = document.getElementsByName("start-round"),
-      checks = document.getElementsByName("include-num");
+      checks = document.getElementsByName("include-num"), i;
     // resets includedNum array to prevent the entries from stacking up from previous sessions
       this.includedNum.length = 0; 
-    for (var i = 0; i < 12; i++) {
+    for (i = 0; i < 12; i++) {
       if (radios[i].checked) {
         this.startRound = Number(radios[i].value);
-        console.log("start round" + this.startRound);
-        //break;
       }
       if (checks[i].checked) {
         this.includedNum.push(Number(radios[i].value));
       }
-    };
-    if (this.sessionMode === "sequence") {
-      this.totalPoints = (13 - this.startRound) * this.includedNum.length;
-      this.showScore();
-    } else {
-      this.totalPoints = (this.includedNum.length) ** 2;
-      this.showScore();
     }
+    // both modes calculate score the same way
+    this.totalPoints = Math.pow((this.includedNum.length), 2);
+    this.showScore();
   },
   reset: function() {
     this.usedNum.length = 0;
     this.correct = 0;
     this.qNum = 0;
-    this.qRank = 1,
-    this.qOrder = [],
-    this.pairs = {},
+    this.qRank = 1;
+    this.qOrder = [];
+    this.pairs = {};
     this.wlcMsg.style.display = "block";
     this.cctMsg.style.display = "none";
     this.wngMsg.style.display = "none";
@@ -74,7 +69,7 @@ var timesTable = {
     this.reset();
     this.setupRound();
     this.setupField();
-    if (this.sessionMode == "sequence") {
+    if (this.sessionMode === "sequence") {
       this.xEl.textContent = this.startRound;
       this.yEl.textContent = this.includedNum[0];
       // set the x and y variable values
@@ -100,7 +95,7 @@ var timesTable = {
       userAnsEl.value ="";
       return;
     }
-    if (userAns == ans) { // if they got it right
+    if (userAns === ans) { // if they got it right
       this.correct += 1;
       //alert('right');
       this.cctMsg.style.display = "block";
@@ -122,7 +117,7 @@ var timesTable = {
   },
   setupNextQ: function() {
   // set up all but initial question for the x and Y html content
-    if (this.sessionMode == "sequence") {
+    if (this.sessionMode === "sequence") {
       this.usedNum.push(this.y);
       if ((this.usedNum.length < this.includedNum.length)) {
         this.randomY(); 
@@ -141,7 +136,7 @@ var timesTable = {
   // randomly sets the y value so it is not a number before seen in the current round
     while (true) {
       this.y = Math.floor((Math.random() * 12) + 1);
-      if ((this.includedNum.includes(this.y)) && (this.usedNum.includes(this.y) == false)) {
+      if ((this.includedNum.includes(this.y)) && (this.usedNum.includes(this.y) === false)) {
         this.yEl.textContent = this.y;
         break;
       }
@@ -151,13 +146,14 @@ var timesTable = {
   //allows user to skip a round, or progress naturally
     this.x += 1;
     while (!(this.includedNum.includes(this.x))) {
-      if (this.x == 13) {
+      if (this.x === 13) {
+        this.adjustScore();
         break;
       }
       this.adjustScore();
       this.x += 1;
     }
-    if (this.x == 13) {
+    if (this.x === 13) {
       this.end(); 
       return;
     }
@@ -172,7 +168,7 @@ var timesTable = {
   adjustScore: function() {
     // if user skips a round, this ensures totalPoints goes down as well, and keeps totalPoints from 
     // changing if the endMsg is visibile ie round over
-    if (this.sessionMode == "sequence") {
+    if (this.sessionMode === "sequence") {
       if ((this.usedNum.length !== this.includedNum.length) && (this.endMsg.style.display === "none")){
         var scoreAdjuster = this.includedNum.length - this.usedNum.length;
         this.totalPoints -= scoreAdjuster;
@@ -198,20 +194,35 @@ var timesTable = {
       }
     }
     //this.initialSetup();
-    this.x = 12 // even though the skip button is covered by the end message 
+    this.x = 12; // even though the skip button is covered by the end message 
     return;     // this would stop x from ever going higher no matter what
   },
   showScore: function() {
   // tallys user's score
-    var scoreEl = document.getElementsByClassName("fin-score"), 
-      score = this.correct / this.qNum * 100;
+    var scoreEl = document.getElementsByClassName("fin-score"),
+      score = this.correct / this.qNum * 100, color, i;
       score = score.toFixed(0);
-    if (isNaN(score)) {
+    if (isNaN(score)) { // 0/0 = NaN so this checks for this 
       score = 0;
     }
-    for (var i=0; i<scoreEl.length; i++) {
-      scoreEl[i].textContent = score + "%"; 
+    if (score === 100) {
+      color = "#29ACFD";
+    }else if (score >= 95) {
+      color = "#004EFF";
+    } else if (score >= 80) {
+      color = "#28A219";
+    } else if (score >= 60) {
+      color = "#EBB500";
+    } else if (score >= 40) {
+      color = "#A21919";
+    } else {
+      color = "#333";
     }
+    for (i=0; i<scoreEl.length; i++) {
+      scoreEl[i].textContent = score + "%"; 
+      scoreEl[i].style.color = color;
+    }
+    
   },
   adjustBars: function() {
     var sesPosVal = (this.qNum / this.totalPoints * 100),
@@ -240,7 +251,7 @@ var timesTable = {
 
     // now pairs has the times table in perfect order,
     // instead of randomizing that, we'll randomize the qOrder itselft
-    this.qOrder.sort(function(a, b){return 0.5 - Math.random()});
+    this.qOrder.sort(function(a, b){return 0.5 - Math.random();});
   },
   nextRandomQ: function() {
     // our qNum is simulated by a for loop here
@@ -251,12 +262,11 @@ var timesTable = {
     this.y = this.pairs[this.qOrder[this.qNum]][1];
     this.xEl.textContent = this.x;
     this.yEl.textContent = this.y;
-    console.log("q#" + this.qNum + " x=" + this.x + " y=" + this.y);
   },
   setMode: function(e) {
     var setting = event.target.id;
     this.sessionMode = setting;
-    if (setting == "random") {
+    if (setting === "random") {
       document.getElementById("session-type").textContent = "Randomly"; 
     } else {
       document.getElementById("session-type").textContent = "In Order"; 
@@ -288,19 +298,15 @@ function toggleBoxes() {
   var boxes = [document.getElementById("create-box"), document.getElementById("cnf-holder")], i;
   boxes[0].style.display = boxes[0].style.display === 'none' ? 'block' : 'none'; // remember that's      condition ? (if true) : (if false);
   boxes[1].style.display = boxes[1].style.display === 'block' ? 'none' : 'block';
-};
+}
 // MAIN PROGRAM BELOW /////////////////////////////////////////////////
 // /////////////////////////////////////////////////
 
 (function() { 
   timesTable.initialSetup();
-})();
-
-
-
+}());
 var start = document.getElementById("start-button"),
   skip = document.getElementById("skip-button"),
-
   uInput = document.getElementById("u-ans");
 
 document.getElementById("create-button").addEventListener("click", function() { 

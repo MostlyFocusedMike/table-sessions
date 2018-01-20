@@ -1,4 +1,4 @@
-#wrapper #top #prob-msg, #wrapper #bottom #cnf-holder #choose-num-form, #wrapper #bottom #cnf-holder #choose-num-form div, .msg-hold {
+#wrapper #top #prob-msg, #wrapper #middle, #wrapper #bottom #cnf-holder #choose-num-form, #wrapper #bottom #cnf-holder #choose-num-form div, .msg-hold {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -99,6 +99,7 @@ html, body {
         font-weight: 100; }
 #wrapper #middle {
   margin: 0;
+  height: 23.5rem;
   padding: .5rem 0;
   position: relative;
   background: white; }
@@ -109,7 +110,7 @@ html, body {
   #wrapper #middle #progress-bars {
     width: 50%;
     min-width: 20rem;
-    margin: 2.5rem auto 3rem; }
+    margin: 1rem 0; }
     #wrapper #middle #progress-bars #round-holder, #wrapper #middle #progress-bars #session-holder {
       margin: 1rem auto;
       background: green;
@@ -141,7 +142,7 @@ html, body {
         text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2); }
   #wrapper #middle #prob-div {
     width: 100%;
-    margin: 1.5rem auto 2.5rem;
+    margin: 1.5rem 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center; }
@@ -324,7 +325,7 @@ html, body {
       border: none;
       color: #C7C7C7;
       font-size: 1.5rem;
-      background: #646464;
+      background: transparent;
       top: 0;
       right: 0; }
     #wrapper #bottom #cnf-holder #choose-num-form div {
