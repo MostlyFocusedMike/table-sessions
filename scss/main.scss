@@ -236,6 +236,14 @@ html, body {
           padding: .1rem 0 0 0;
           color: #333;
           border: .1rem solid #333;
+          /* firefox remove the number spinner */ 
+          -moz-appearance:textfield;
+          /* Webkit browsers like Safari and Chrome */
+          &[type=number]::-webkit-inner-spin-button, 
+          &[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+          }
         }
       }
       p {
@@ -295,6 +303,12 @@ html, body {
       margin: 1rem auto;
       border: .1rem solid #C7C7C7;
       display: block;
+      p {
+        color: white;
+        line-height: 1.5rem;
+        text-align: center;
+        font-weight: 100;
+      }
       #create-button {
         @include button(#FAFAFA,#28AA18, #238916,20rem);
       }
@@ -435,5 +449,3 @@ html, body {
   0%   {opacity: 0;}
   100% {opacity: 1;}
 }
-
-

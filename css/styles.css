@@ -163,7 +163,13 @@ html, body {
         font-size: 1.7rem;
         padding: .1rem 0 0 0;
         color: #333;
-        border: .1rem solid #333; }
+        border: .1rem solid #333;
+        /* firefox remove the number spinner */
+        -moz-appearance: textfield;
+        /* Webkit browsers like Safari and Chrome */ }
+        #wrapper #middle #prob-div #statement-holder input[type=number]::-webkit-inner-spin-button, #wrapper #middle #prob-div #statement-holder input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0; }
     #wrapper #middle #prob-div p {
       display: inline-block;
       width: 100%;
@@ -279,6 +285,11 @@ html, body {
   margin: 1rem auto;
   border: .1rem solid #C7C7C7;
   display: block; }
+  #wrapper #bottom #create-box p {
+    color: white;
+    line-height: 1.5rem;
+    text-align: center;
+    font-weight: 100; }
   #wrapper #bottom #create-box #create-button {
     margin: 1rem auto;
     font-size: 1rem;

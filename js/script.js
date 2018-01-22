@@ -66,6 +66,7 @@ var timesTable = {
     this.reset();
     this.setupRound();
     this.setupField();
+    this.displayCurrentSettings();
     if (this.sessionMode === "sequence") {
       this.xEl.textContent = this.startRound;
       this.yEl.textContent = this.includedNum[0];
@@ -284,6 +285,11 @@ var timesTable = {
       }
       randEl.style.display = "block";
     }
+  },
+  displayCurrentSettings: function() {
+  // shows users current settings at the bottom of the screen
+    document.getElementById("current-mode").textContent = this.sessionMode === 'sequence' ? 'In Order' : 'Randomly';
+    document.getElementById("current-include").textContent = this.includedNum.join(", ");
   }
 }; // don't forget to use ; after objects
 
@@ -291,8 +297,8 @@ var timesTable = {
 function toggleBoxes() {
   // toggle display on or off 
   var boxes = [document.getElementById("create-box"), document.getElementById("cnf-holder")], i;
-  boxes[0].style.display = boxes[0].style.display === 'none' ? 'block' : 'none'; // remember that's      condition ? (if true) : (if false);
-  boxes[1].style.display = boxes[1].style.display === 'block' ? 'none' : 'block';
+  boxes[1].style.display = boxes[1].style.display === 'block' ? 'none' : 'block'; // remember that's:    condition ? (if true) : (if false);
+  boxes[0].style.display = boxes[0].style.display === 'none' ? 'block' : 'none';
 }
 // MAIN PROGRAM BELOW /////////////////////////////////////////////////
 // /////////////////////////////////////////////////
@@ -360,6 +366,5 @@ document.getElementById("sequence").addEventListener("click", function() {
   timesTable.setMode();
   timesTable.initialSetup();
 });
-
 
 }());

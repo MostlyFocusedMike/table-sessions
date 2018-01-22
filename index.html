@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Mike Cronin">
-        <meta name="description" content="A way for people to practice their times tables">
-        <title>Times Tables</title>
+        <meta name="description" content="Practice your times tables online">
+        <title>Table Sessions</title>
         <link rel="stylesheet" href="css/styles.min.css" type="text/css" />
   </head>
   <body>
@@ -48,7 +48,7 @@
         <div id="statement-holder">
           <h2 id="statement"><span id="x-id">X</span> <span class="mult">*
             </span> <span id="y-id">Y</span> = </h2>
-          <input type="text" id="u-ans" value="?" />
+          <input type="number" id="u-ans" value="?" />
         </div>
         <p>Press enter to submit your answer</p>
         <button type="submit" id="skip-button" class="seq-el">Skip Round</button>
@@ -81,7 +81,8 @@
 
     <div id="bottom">
       <div id="create-box">
-        <button type="submit" id="create-button">Create New Session</button>
+        <p>Currently practicing times tables: <span id="current-mode">In Order</span><br />Using the numbers: <span id="current-include">2, 3, 4, 5, 6, 7, 8, 9, 11, 12</span></p>
+        <button type="submit" id="create-button">Customize Session</button>
       </div>
       <div id="cnf-holder">
         <div id="choose-num-form">
