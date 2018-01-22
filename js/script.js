@@ -1,10 +1,7 @@
 /*jslint plusplus: true*/
 /*jslint white: true*/
 /*globals $:false */
-/*jslint bitwise: false*/
 
-// DON'T FORGET A POLYFILL FOR THE INCLUDES METHOG
-// OK??
 
 (function () {
 "use strict";
@@ -147,10 +144,8 @@ var timesTable = {
     this.x += 1;
     while (!(this.includedNum.includes(this.x))) {
       if (this.x === 13) {
-        this.adjustScore();
         break;
       }
-      this.adjustScore();
       this.x += 1;
     }
     if (this.x === 13) {
@@ -178,10 +173,10 @@ var timesTable = {
     }
   },
   end: function() {
-    this.adjustScore(); 
-    this.qNum = this.totalPoints; // if the user skips to the end, the progress session bar 
-    this.adjustBars();            // will also jump to 100%;
     this.showScore();
+    this.totalPoints = this.qNum; // if the user skips to the end, the progress session bar 
+    this.adjustBars();            // will also jump to 100%;
+    
     document.getElementById("end-msg").style.display = "block"; 
     document.getElementById("tot-q").textContent = this.correct + "/" + this.qNum;
     if (this.missedQs.innerHTML === "") { // if wrong answers is empty, display congratulations message
@@ -200,7 +195,7 @@ var timesTable = {
   showScore: function() {
   // tallys user's score
     var scoreEl = document.getElementsByClassName("fin-score"),
-      score = this.correct / this.qNum * 100, color, i;
+      score = (this.correct / this.qNum) * 100, color, i;
       score = score.toFixed(0);
     if (isNaN(score)) { // 0/0 = NaN so this checks for this 
       score = 0;
@@ -319,7 +314,7 @@ document.getElementById("close-button").addEventListener("click", function() {
 
 
 // start practice session
-start.addEventListener("click", function() { 
+document.getElementById("start-button").addEventListener("click", function() { 
   timesTable.initialSetup();
   uInput.value = "";
   toggleBoxes();
@@ -345,8 +340,7 @@ uInput.addEventListener('keypress', function (e) {
       timesTable.checkAnswer();
     }
 });
-
-
+// skip to the end when in random mode 
 document.getElementById("end-button").addEventListener("click", function() {
   timesTable.end();
 });
